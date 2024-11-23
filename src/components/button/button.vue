@@ -35,7 +35,7 @@ import { ref, computed } from 'vue';
 
 interface ButtonProps {
   label?: string;
-  variant?: 'link' | 'outline' | 'solid' | 'secondary';
+  variant?: 'link' | 'outline' | 'solid' | 'secondary' | 'ghost';
   fullWidth?: boolean;
   loading?: boolean;
   customClasses?: string;
@@ -53,7 +53,8 @@ const buttonClasses = computed(() => {
     link: 'bg-transparent text-primary-700 border-none hover:bg-opacity-10 !p-0',
     outline: 'bg-transparent text-surface-800 border border-[#6c668540] hover:bg-opacity-10',
     solid: 'bg-primary-950 text-white hover:bg-opacity-90',
-    secondary: 'bg-primary-50 text-primary-500 hover:bg-opacity-90'
+    secondary: 'bg-primary-50 text-primary-500 hover:bg-opacity-90',
+    ghost: "hover:bg-accent hover:text-accent-foreground !p-3 ",
   };
   const fullWidthClasses = props.fullWidth ? 'w-full' : '';
   const loadingClasses = props.loading ? 'cursor-wait disabled:opacity-[0.8]' : '';

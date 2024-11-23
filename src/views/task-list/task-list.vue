@@ -6,6 +6,7 @@ import { computed } from 'vue'
 // import TableHead from '@/components/ui/TableHead.vue'
 // import TableHeader from '@/components/ui/TableHeader.vue'
 // import TableRow from '@/components/ui/TableRow.vue'
+
 import {
   Table,
   TableHeader,
@@ -16,9 +17,10 @@ import {
   TableCell,
   TableCaption,
 } from "@/components/data/table.vue";
-// import Button from '@/components/ui/Button.vue'
+import Badge from '@/components/misc/bagde.vue'
 // import Badge from '@/components/ui/Badge.vue'
 import { Edit2Icon, Trash2Icon } from 'lucide-vue-next'
+import Button from '@/components/button/button.vue';
 
 
 // Props definition

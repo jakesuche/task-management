@@ -5,14 +5,9 @@ defineOptions({
 
 import { ref, onMounted } from 'vue'
 import TaskFilter from '@/views/task-filter/task-filter.vue'
-// import TaskList from './TaskList.vue'
-// import TaskForm from './TaskForm.vue'
-// import TaskFilter from './TaskFilter.vue'
-// import KanbanBoard from './KanbanBoard.vue'
-// import { Button } from '@/components/ui/button'
+import KanbarBoard from '../kanban-board/kanbar-board.vue';
 import TaskList from '@/views/task-list/task-list.vue'
 import { PlusIcon, ListIcon, LayoutIcon } from 'lucide-vue-next'
-import button from '@/components/button/button.vue'
 import Button from '@/components/button/button.vue'
 import Tab from '@/components/panel/tab.vue'
 
@@ -131,7 +126,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+  <div class="max-w-7xl xl:max-w-[1500px] mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
     <div class="p-8">
       <h1 class="text-3xl font-bold mb-6 text-gray-800">Task Management Dashboard</h1>
       <div class="mb-6">
@@ -156,7 +151,7 @@ onMounted(() => {
           />
         </template>
         <template #board>
-          <div>Board View Content</div>
+          <KanbarBoard />
         </template>
       </Tab>
       <!--

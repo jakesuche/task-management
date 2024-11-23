@@ -1,110 +1,143 @@
-<script lang="ts" setup>
-import { ref, computed } from 'vue'
-import { DragDropContext, Droppable, Draggable } from '@dnd-kit/vue'
-import { Task } from '../types/Task'
-import Card from '@/components/ui/Card.vue'
-import CardContent from '@/components/ui/CardContent.vue'
-import Badge from '@/components/ui/Badge.vue'
-import Button from '@/components/ui/Button.vue'
-import { Edit2Icon, Trash2Icon } from 'lucide-vue-next'
 
-interface Column {
-  id: string
-  title: string
-}
+<template>
+  <div class="flex gap-4 overflow-x-auto pb-4">
 
+    <div v-for="column in columns" :key="column.id" class="flex-1 min-w-[300px]">
+      <h3 class="font-semibold mb-2">{{ column.title }}</h3>
+      <VueDraggable
+        :list="getTasksForColumn( column.id).value"
+
+        :group="{ name: 'tasks', pull: true, put: true }"
+        item-key="id"
+        @change="(e) => onDragChange(e, column.id)"
+        class="bg-gray-100 p-2 rounded-md min-h-[500px]"
+      >
+        <div v-for="task in getTasksForColumn( column.id).value">
+          <div class="bg-white p-4 mb-2 rounded shadow">
+            <h4 class="font-medium mb-2">{{ task.title }}</h4>
+            <p class="text-sm text-gray-600 mb-2">{{ task.description }}</p>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-2">
+                <span :class="getStatusColor(task.status)" class="px-2 py-1 rounded-full text-xs">
+                  {{ task.status }}
+                </span>
+                <span :class="getPriorityColor(task.priority)" class="px-2 py-1 rounded-full text-xs">
+                  {{ task.priority }}
+                </span>
+              </div>
+              <div class="flex gap-2">
+                <button @click="$emit('edit', task)" class="text-indigo-600 hover:text-indigo-900">
+                  <Edit2Icon class="h-4 w-4" />
+                </button>
+                <button @click="$emit('delete', task.id)" class="text-red-600 hover:text-red-900">
+                  <Trash2Icon class="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </VueDraggable>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import {   VueDraggableNext as VueDraggable } from 'vue-draggable-next';
+import { Edit2Icon, Trash2Icon } from 'lucide-vue-next';
+
+let tasks = ref([
+  {
+    id: 1,
+    title: "Redesign website homepage",
+    description: "Update the layout and color scheme of the main landing page",
+    status: "In Progress",
+    priority: "High",
+    dueDate: "2024-11-20T12:00:00Z",
+  },
+  {
+    id: 2,
+    title: "Implement user authentication",
+    description: "Add login and registration functionality to the app",
+    status: "Pending",
+    priority: "High",
+    dueDate: "2024-11-22T15:00:00Z",
+  },
+  {
+    id: 3,
+    title: "Write API documentation",
+    description: "Create comprehensive documentation for the RESTful API",
+    status: "Completed",
+    priority: "Medium",
+    dueDate: "2024-11-18T09:00:00Z",
+  },
+  {
+    id: 4,
+    title: "Optimize database queries",
+    description: "Improve the performance of slow database queries",
+    status: "Pending",
+    priority: "Medium",
+    dueDate: "2024-11-25T14:00:00Z",
+  },
+  {
+    id: 5,
+    title: "Set up CI/CD pipeline",
+    description: "Configure automated testing and deployment process",
+    status: "In Progress",
+    priority: "High",
+    dueDate: "2024-11-21T11:00:00Z",
+  },
+])
 const props = defineProps<{
-  tasks: Task[]
-  onEdit: (task: Task) => void
-  onDelete: (id: number) => void
-  onDragEnd: (result: any) => void
-}>()
+  tasks: Task[];
+}>();
 
-const columns: Column[] = [
+const emit = defineEmits(['edit', 'delete', 'update:tasks']);
+
+const columns = [
   { id: 'Pending', title: 'Pending' },
   { id: 'In Progress', title: 'In Progress' },
   { id: 'Completed', title: 'Completed' },
-]
+];
 
-// Utility functions for styling
-const getStatusColor = (status: string): string => {
+const getTasksForColumn = (columnId: string) => {
+  return computed(() => tasks.value.filter(task => task.status === columnId));
+};
+
+const getStatusColor = (status: string) => {
   switch (status) {
     case 'Completed':
-      return 'bg-green-500'
+      return 'bg-green-100 text-green-800';
     case 'In Progress':
-      return 'bg-yellow-500'
+      return 'bg-yellow-100 text-yellow-800';
     default:
-      return 'bg-gray-500'
+      return 'bg-gray-100 text-gray-800';
   }
-}
+};
 
-const getPriorityColor = (priority: string): string => {
+const getPriorityColor = (priority: string) => {
   switch (priority) {
     case 'High':
-      return 'bg-red-500'
+      return 'bg-red-100 text-red-800';
     case 'Medium':
-      return 'bg-orange-500'
+      return 'bg-orange-100 text-orange-800';
     default:
-      return 'bg-blue-500'
+      return 'bg-blue-100 text-blue-800';
   }
-}
+};
+
+const onDragChange = (evt: any, columnId: string) => {
+  if (evt.added || evt.moved) {
+    const updatedTasks = tasks.value.map(task => {
+      if (task.id === evt.added?.element.id || task.id === evt.moved?.element.id) {
+        return { ...task, status: columnId };
+      }
+      return task;
+    });
+
+    tasks.value =  updatedTasks
+    emit('update:tasks', updatedTasks);
+  }
+};
 </script>
 
-<template>
-  <DragDropContext @dragend="props.onDragEnd">
-    <div class="flex gap-4 overflow-x-auto pb-4">
-      <div
-        v-for="column in columns"
-        :key="column.id"
-        class="flex-1 min-w-[300px]"
-      >
-        <h3 class="font-semibold mb-2">{{ column.title }}</h3>
-        <Droppable :id="column.id">
-          <template #default="{ setNodeRef, droppableProps, placeholder }">
-            <div
-              v-bind="droppableProps"
-              ref="setNodeRef"
-              class="bg-gray-100 p-2 rounded-md min-h-[500px]"
-            >
-              <Draggable
-                v-for="(task, index) in props.tasks.filter(task => task.status === column.id)"
-                :key="task.id"
-                :id="task.id"
-                :index="index"
-              >
-                <template #default="{ setNodeRef, draggableProps, dragHandleProps }">
-                  <Card
-                    ref="setNodeRef"
-                    v-bind="draggableProps"
-                    v-bind="dragHandleProps"
-                    class="mb-2"
-                  >
-                    <CardContent class="p-4">
-                      <h4 class="font-medium mb-2">{{ task.title }}</h4>
-                      <p class="text-sm text-gray-600 mb-2">{{ task.description }}</p>
-                      <div class="flex justify-between items-center">
-                        <div class="flex gap-2">
-                          <Badge :class="getStatusColor(task.status)">{{ task.status }}</Badge>
-                          <Badge :class="getPriorityColor(task.priority)">{{ task.priority }}</Badge>
-                        </div>
-                        <div class="flex gap-2">
-                          <Button variant="ghost" size="icon" @click="props.onEdit(task)">
-                            <Edit2Icon class="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="icon" @click="props.onDelete(task.id)">
-                            <Trash2Icon class="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </template>
-              </Draggable>
-              {{ placeholder }}
-            </div>
-          </template>
-        </Droppable>
-      </div>
-    </div>
-  </DragDropContext>
-</template>
