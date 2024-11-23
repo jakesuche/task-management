@@ -10,6 +10,7 @@ import TaskList from '@/views/task-list/task-list.vue'
 import { PlusIcon, ListIcon, LayoutIcon } from 'lucide-vue-next'
 import Button from '@/components/button/button.vue'
 import Tab from '@/components/panel/tab.vue'
+import ModalDialog from '@/components/overlay/dialog.vue'
 
 
 // Importing the Task type
@@ -21,6 +22,12 @@ const isLoading = ref<boolean>(true)
 const error = ref<string | null>(null)
 const isFormOpen = ref<boolean>(false)
 const editingTask = ref<Task | null>(null)
+const dialogVisible = ref(false)
+
+
+const handleDialog = () => {
+  dialogVisible.value = !dialogVisible.value
+}
 
 // Fetch tasks from the server
 const fetchTasks = async (): Promise<void> => {
@@ -132,7 +139,7 @@ onMounted(() => {
       <div class="mb-6">
         <TaskFilter @filter="handleFilter" />
       </div>
-      <Button>
+      <Button @click="handleDialog">
         <PlusIcon class="mr-2 h-4 w-4" />
         Add New Task
       </Button>
@@ -181,6 +188,7 @@ onMounted(() => {
         </TabsContent>
       </Tabs> -->
     </div>
+    <overlay-dialog />
     <!-- <TaskForm
       v-if="isFormOpen || editingTask"
       @submit="editingTask ? handleUpdateTask : handleAddTask"
@@ -190,5 +198,16 @@ onMounted(() => {
       }"
       :task="editingTask"
     /> -->
+
+    <ModalDialog
+
+      :header="'Add New Task'"
+      :open="dialogVisible"
+      :confirmButtonText="'Save'"
+      @update:visible="dialogVisible = $event"
+
+    customeClass="max-w-[800px]"  >
+
+    </ModalDialog>
   </div>
 </template>
