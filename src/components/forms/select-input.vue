@@ -5,7 +5,7 @@
     </label>
     <div
       ref="toggle"
-      class="border rounded-lg p-2.5 flex items-center cursor-pointer justify-between bg-neutral-50"
+      class="border rounded-lg p-2.5 flex items-center cursor-pointer justify-between "
       :class="errorText && 'border-red-500'"
       @click="toggleDropdown"
     >

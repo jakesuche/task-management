@@ -5,13 +5,12 @@ defineOptions({
 
 import { ref, onMounted } from 'vue'
 import TaskFilter from '@/views/task-filter/task-filter.vue'
-import KanbarBoard from '../kanban-board/kanbar-board.vue';
+import KanbarBoard from '../kanban-board/kanbar-board.vue'
 import TaskList from '@/views/task-list/task-list.vue'
 import { PlusIcon, ListIcon, LayoutIcon } from 'lucide-vue-next'
 import Button from '@/components/button/button.vue'
 import Tab from '@/components/panel/tab.vue'
-import ModalDialog from '@/components/overlay/dialog.vue'
-
+import TaskForm from '@/views/task-form/task-form.vue'
 
 // Importing the Task type
 
@@ -23,7 +22,6 @@ const error = ref<string | null>(null)
 const isFormOpen = ref<boolean>(false)
 const editingTask = ref<Task | null>(null)
 const dialogVisible = ref(false)
-
 
 const handleDialog = () => {
   dialogVisible.value = !dialogVisible.value
@@ -151,7 +149,7 @@ onMounted(() => {
         ]"
       >
         <template #list>
-           <TaskList
+          <TaskList
             :tasks="filteredTasks"
             @edit="(task) => (editingTask = task)"
             @delete="handleDeleteTask"
@@ -189,25 +187,12 @@ onMounted(() => {
       </Tabs> -->
     </div>
     <overlay-dialog />
-    <!-- <TaskForm
-      v-if="isFormOpen || editingTask"
-      @submit="editingTask ? handleUpdateTask : handleAddTask"
-      @close="() => {
-        isFormOpen = false
-        editingTask = null
-      }"
-      :task="editingTask"
-    /> -->
-
-    <ModalDialog
-
-      :header="'Add New Task'"
-      :open="dialogVisible"
-      :confirmButtonText="'Save'"
+    <TaskForm
       @update:visible="dialogVisible = $event"
-
-    customeClass="max-w-[800px]"  >
-
-    </ModalDialog>
+      @submit="editingTask ? handleUpdateTask : handleAddTask"
+      @close="() => { dialogVisible = false; editingTask = null }"
+      :open="dialogVisible || !!editingTask"
+      :task="editingTask"
+    />
   </div>
 </template>

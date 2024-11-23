@@ -20,15 +20,6 @@
         :placeholder="placeholder"
         :class="errorText && 'border-red-500'"
       />
-
-      <button
-        v-if="type == 'password'"
-        @click.prevent="toggleEye"
-        class="password-button absolute right-3 top-[-40%] bottom-[-50%]"
-      >
-        <Icon v-if="isPasswordEyeOpen" name="cv:eye" />
-        <Icon v-if="!isPasswordEyeOpen" name="cv:eye-off" />
-      </button>
     </div>
     <Transition name="slide-fade">
       <span v-if="errorText" class="text-xs text-red-600">
@@ -39,7 +30,9 @@
 </template>
 
 <script setup lang="ts">
-import { usePasswordEye } from "~/composables/usePassword";
+import { computed } from 'vue';
+
+
 
 const props = defineProps({
   label: String,
@@ -58,7 +51,7 @@ const props = defineProps({
   errorText: String,
 });
 
-const { isPasswordEyeOpen, toggleEye } = usePasswordEye();
+
 
 const emit = defineEmits([
   "update:modelValue",
@@ -68,9 +61,6 @@ const emit = defineEmits([
   "enter",
 ]);
 const computedType = computed(() => {
-  if (props.type === "password") {
-    return isPasswordEyeOpen.value ? "text" : "password";
-  }
   return props.type;
 });
 const handleChange = ({ target }: Event) =>
