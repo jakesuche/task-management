@@ -11,7 +11,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "mock": "json-server --watch db.json --port 8080"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.60.6",
@@ -21,6 +22,7 @@
     "vue-draggable-next": "^2.2.1",
     "vue-smooth-dnd": "^0.8.1",
     "vuedraggable": "^2.24.3"
+    
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
@@ -37,6 +39,7 @@
     "eslint": "^9.14.0",
     "eslint-plugin-vue": "^9.30.0",
     "jsdom": "^25.0.1",
+    "json-server": "^1.0.0-beta.3",
     "npm-run-all2": "^7.0.1",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",

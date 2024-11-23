@@ -9,11 +9,8 @@
         </div>
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <input
-              type="search"
-              placeholder="Search..."
-              class="max-w-sm rounded-md border border-gray-300 px-3 py-2 text-sm"
-            />
+            <SearchInput icon-position="right" />
+
           </div>
           <div class="ml-4 flex items-center md:ml-6">
             <button class="p-1 rounded-full text-gray-400 hover:text-gray-500">
@@ -59,6 +56,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Bell, User } from 'lucide-vue-next';
+import SearchInput from '../forms/search-input.vue';
 
 const isUserMenuOpen = ref(false);
 </script>

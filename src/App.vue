@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <div class="flex h-screen bg-gray-100 overflow-hidden">
     <AppSideBar />
     <div class="flex-1 flex flex-col overflow-y-auto">
@@ -12,7 +13,10 @@
 
 <script setup lang="ts">
 import TaskDashboard from '@/views/task-dashboard/task-dashboard.vue'
-import Navbar from './components/navbar/navbar.vue'
-import AppSideBar from './components/app-side-bar/app-side-bar.vue'
+import Navbar from '@/components/navbar/navbar.vue'
+import AppSideBar from '@/components/app-side-bar/app-side-bar.vue'
+import Toast from '@/components/toast/toast.vue';
 </script>
 <style scoped></style>
+
+

@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center border rounded-lg px-2 py-1 w-full">
-    <IconsSearch :icon-position="iconPosition" v-if="iconPosition === 'left'" />
+    <Search :icon-position="iconPosition" v-if="iconPosition === 'left'" />
     <input
       v-model="inputValue"
       :placeholder="placeholder || 'Search...'"
@@ -9,7 +9,8 @@
       :class="inputClass"
       @keypress="handleEnter"
     />
-    <IconsSearch
+    <Search
+      class="text-surface-400 text-[8px]"
       :icon-position="iconPosition"
       v-if="iconPosition === 'right'"
     />
@@ -17,7 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { Search } from 'lucide-vue-next';
 
 const props = defineProps<{
   modelValue?: string;

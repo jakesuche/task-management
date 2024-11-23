@@ -28,7 +28,7 @@
         </transition>
       </div>
       <nav class="flex flex-1 flex-col gap-y-4 pt-10 px-4">
-       
+
         <NuxtLink
           :href="item.link"
           v-for="item in nav_items"
@@ -43,7 +43,7 @@
             class="flex-1 leading-[20px] flex overflow-hidden text-ellipsis whitespace-nowrap group-hover:text-[#625df5]"
           >
             <span
-            :class="`${current_path.startsWith(item.link) && 'text-[#625df5]'}`" 
+            :class="`${current_path.startsWith(item.link) && 'text-[#625df5]'}`"
               class="ml-2 block text-surface-600 text-[calc(1.75*0.5rem)] font-bold group-hover:text-[#625df5]"
               >{{ item.label }}</span
             >
@@ -65,7 +65,6 @@
 </template>
 
 <script lang="ts" setup>
-import { routes } from '~/utils/constants';
 
 
 
@@ -73,6 +72,7 @@ const router = useRouter();
 const current_path = computed(()=>router.currentRoute.value.path);
 const isCollapsed = ref(false);
 import {nav_items} from '../../utils/constants'
+import { computed, ref } from 'vue';
 
 function toggleCollapse() {
   isCollapsed.value = !isCollapsed.value;

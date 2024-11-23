@@ -1,1 +1,1 @@
-export const endPointTask = `/task`
+export const endPointTask = `/tasks`

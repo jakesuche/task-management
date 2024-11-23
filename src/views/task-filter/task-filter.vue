@@ -10,6 +10,8 @@ interface TaskFilterProps {
 
 const props = defineProps<TaskFilterProps>()
 
+const emit = defineEmits(['filter']);
+
 // Reactive State
 const status = ref<string>('all')
 const priority = ref<string>('all')
@@ -17,11 +19,9 @@ const sortBy = ref<string>('none')
 
 // Emit the filter values to parent
 const handleFilter = () => {
-  props.onFilter(
-    status.value === 'all' ? '' : status.value,
+ emit('filter', status.value === 'all' ? '' : status.value,
     priority.value === 'all' ? '' : priority.value,
-    sortBy.value === 'none' ? '' : sortBy.value,
-  )
+    sortBy.value === 'none' ? '' : sortBy.value);
 }
 </script>
 
