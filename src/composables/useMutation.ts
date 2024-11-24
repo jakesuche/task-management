@@ -1,7 +1,13 @@
-import { ref } from 'vue'
+
+
+import { BASE_URL } from "@/util/constants"
+import { ref } from "vue"
+
+
+
 
 export function useMutation<TPayload, TResponse>(
-  url: string,
+  url: string | (() => string), // Allow static or dynamic URLs
   method: 'POST' | 'PUT' | 'DELETE',
   options: {
     onSuccess?: (data: TResponse) => void
@@ -14,14 +20,22 @@ export function useMutation<TPayload, TResponse>(
   const data = ref<TResponse | null>(null)
   const error = ref<string | null>(null)
 
-  const mutate = async (payload: TPayload) => {
+  const mutate = async (
+    payload?: TPayload,
+    callbacks: {
+      onSuccess?: (data: TResponse) => void
+      onError?: (error: string) => void
+    } = {},
+  ) => {
     isPending.value = true
     isSuccess.value = false
     isError.value = false
     error.value = null
 
     try {
-      const response = await fetch(url, {
+      const resolvedUrl = typeof url === 'function' ? url() : url
+
+      const response = await fetch(`${BASE_URL}${resolvedUrl}`, {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -37,14 +51,20 @@ export function useMutation<TPayload, TResponse>(
       data.value = result
       isSuccess.value = true
 
-      if (options.onSuccess) {
+      // Trigger the success callback (local > global)
+      if (callbacks.onSuccess) {
+        callbacks.onSuccess(result)
+      } else if (options.onSuccess) {
         options.onSuccess(result)
       }
     } catch (err: any) {
       error.value = err.message || 'An error occurred'
       isError.value = true
 
-      if (options.onError) {
+      // Trigger the error callback (local > global)
+      if (callbacks.onError) {
+        callbacks.onError(error.value as any)
+      } else if (options.onError) {
         options.onError(error.value as any)
       }
     } finally {

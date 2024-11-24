@@ -25,7 +25,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onClickOutside } from '@vueuse/core';
+import { useClickOutside } from '@/composables/useClickOutside';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 defineProps({
   class:String
@@ -46,7 +47,7 @@ const closePopover = () => {
   isOpen.value = false;
 };
 
-onClickOutside(popover, (e) => {
+useClickOutside(popover, (e) => {
   const clickedInsideToggle = toggle.value && toggle.value.contains(e.target as Node);
   if(!clickedInsideToggle){
       closePopover()

@@ -1,52 +1,27 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Redesign website homepage",
+      "id": "1",
+      "title": "Implement user authenticationb",
       "description": "Update the layout and color scheme of the main landing page",
-      "status": "In Progress",
-      "priority": "High",
-      "dueDate": "2024-11-20T12:00:00Z",
-      "assignee": {
-        " name": "Alex Johnson",
-        "avatar": "/placeholder.svg?height=32&width=32"
-      },
-      "subTasks": [
-        { "id": "st1", "title": "Design mockups", " completed": true },
-        { "id": "st2", "title": "Implement responsive layout", " completed": false }
-      ],
-      "comments": [
-        {
-          "id": "c1",
-          "content": "Let's focus on mobile-first design",
-          "authorName": "Sarah Chen",
-          "authorAvatar": "/placeholder.svg?height=32&width=32",
-          "createdAt": "2024-11-20T12:00:00Z"
-        }
-      ],
-      "labels": ["Design", "Frontend"],
-      "attachments": [
-        {
-          "name": "mockup.fig",
-          "url": "#",
-          "type": "figma"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Implement user authentication",
-      "description": "Add login and registration functionality to the app",
       "status": "Pending",
-      "priority": "High",
-      "dueDate": "2024-11-22T15:00:00Z",
+      "priority": "Medium",
+      "dueDate": "2024-11-15",
       "assignee": {
-        " name": "Alex Johnson",
+        "name": "Alex Johnson",
         "avatar": "/placeholder.svg?height=32&width=32"
       },
       "subTasks": [
-        { "id": "st1", "title": "Design mockups", " completed": true },
-        { "id": "st2", "title": "Implement responsive layout", " completed": false }
+        {
+          "id": "st1",
+          "title": "Design mockups",
+          "completed": true
+        },
+        {
+          "id": "st2",
+          "title": "Implement responsive layout",
+          "completed": false
+        }
       ],
       "comments": [
         {
@@ -54,10 +29,13 @@
           "content": "Let's focus on mobile-first design",
           "authorName": "Sarah Chen",
           "authorAvatar": "/placeholder.svg?height=32&width=32",
-          "createdAt": "2024-11-20T12:00:00Z"
+          "createdAt": "2024-11-15"
         }
       ],
-      "labels": ["Design", "Frontend"],
+      "labels": [
+        "Design",
+        "Frontend"
+      ],
       "attachments": [
         {
           "name": "mockup.fig",
@@ -67,19 +45,27 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Write API documentation",
       "description": "Create comprehensive documentation for the RESTful API",
       "status": "Completed",
       "priority": "Medium",
-      "dueDate": "2024-11-18T09:00:00Z",
+      "dueDate": "2024-11-15",
       "assignee": {
-        " name": "Alex Johnson",
+        "name": "Alex Johnson",
         "avatar": "/placeholder.svg?height=32&width=32"
       },
       "subTasks": [
-        { "id": "st1", "title": "Design mockups", " completed": true },
-        { "id": "st2", "title": "Implement responsive layout", " completed": false }
+        {
+          "id": "st1",
+          "title": "Design mockups",
+          "completed": true
+        },
+        {
+          "id": "st2",
+          "title": "Implement responsive layout",
+          "completed": false
+        }
       ],
       "comments": [
         {
@@ -90,7 +76,10 @@
           "createdAt": "2024-11-20T12:00:00Z"
         }
       ],
-      "labels": ["Design", "Frontend"],
+      "labels": [
+        "Design",
+        "Frontend"
+      ],
       "attachments": [
         {
           "name": "mockup.fig",
@@ -100,19 +89,27 @@
       ]
     },
     {
-      "id": 4,
-      "title": "Optimize database queries",
-      "description": "Improve the performance of slow database queries",
-      "status": "Pending",
+      "id": "4",
+      "title": "Write API documentation",
+      "description": "Create comprehensive documentation for the RESTful API",
+      "status": "Completed",
       "priority": "Medium",
-      "dueDate": "2024-11-25T14:00:00Z",
+      "dueDate": "2024-11-15",
       "assignee": {
-        " name": "Alex Johnson",
+        "name": "Alex Johnson",
         "avatar": "/placeholder.svg?height=32&width=32"
       },
       "subTasks": [
-        { "id": "st1", "title": "Design mockups", " completed": true },
-        { "id": "st2", "title": "Implement responsive layout", " completed": false }
+        {
+          "id": "st1",
+          "title": "Design mockups",
+          "completed": true
+        },
+        {
+          "id": "st2",
+          "title": "Implement responsive layout",
+          "completed": false
+        }
       ],
       "comments": [
         {
@@ -123,7 +120,10 @@
           "createdAt": "2024-11-20T12:00:00Z"
         }
       ],
-      "labels": ["Design", "Frontend"],
+      "labels": [
+        "Design",
+        "Frontend"
+      ],
       "attachments": [
         {
           "name": "mockup.fig",
@@ -133,19 +133,27 @@
       ]
     },
     {
-      "id": 5,
-      "title": "Set up CI/CD pipeline",
-      "description": "Configure automated testing and deployment process",
+      "id": "1059",
+      "title": "Implement user authenticationb",
+      "description": "Implement user authenticationb",
       "status": "In Progress",
-      "priority": "High",
-      "dueDate": "2024-11-21T11:00:00Z",
+      "priority": "Low",
+      "dueDate": "2024-11-15",
       "assignee": {
-        " name": "Alex Johnson",
+        "name": "Alex Johnson",
         "avatar": "/placeholder.svg?height=32&width=32"
       },
       "subTasks": [
-        { "id": "st1", "title": "Design mockups", " completed": true },
-        { "id": "st2", "title": "Implement responsive layout", " completed": false }
+        {
+          "id": "st1",
+          "title": "Design mockups",
+          "completed": true
+        },
+        {
+          "id": "st2",
+          "title": "Implement responsive layout",
+          "completed": false
+        }
       ],
       "comments": [
         {
@@ -156,7 +164,10 @@
           "createdAt": "2024-11-20T12:00:00Z"
         }
       ],
-      "labels": ["Design", "Frontend"],
+      "labels": [
+        "Design",
+        "Frontend"
+      ],
       "attachments": [
         {
           "name": "mockup.fig",

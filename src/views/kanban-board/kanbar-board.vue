@@ -1,6 +1,6 @@
 
 <template>
-  <div class="flex gap-4 overflow-x-auto pb-4">
+  <div class="flex gap-4 overflow-x-auto pb-4" v-if="tasks.length > 0">
 
     <div v-for="column in columns" :key="column.id" class="flex-1 min-w-[300px]">
       <h3 class="font-semibold mb-2">{{ column.title }}</h3>
@@ -39,10 +39,13 @@
       </VueDraggable>
     </div>
   </div>
+  <div v-else>
+    <p>No data found</p>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, toRaw } from 'vue';
 import {   VueDraggableNext as VueDraggable } from 'vue-draggable-next';
 import { Edit2Icon, Trash2Icon } from 'lucide-vue-next';
 
@@ -93,7 +96,6 @@ const onDragChange = (evt: any, columnId: string) => {
       return task;
     });
 
-    // tasks.value =  updatedTasks
     emit('update:tasks', updatedTasks);
   }
 };

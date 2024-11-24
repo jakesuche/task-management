@@ -18,10 +18,14 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
-import { CheckIcon } from 'lucide-vue-next';
+import { ref, defineProps , defineOptions, watch } from 'vue'
+import { CheckIcon } from 'lucide-vue-next'
 
-defineProps({
+defineOptions({
+  name: 'Checkbox',
+})
+
+const props = defineProps({
   modelValue: {
     type: Boolean,
     required: true,
@@ -35,7 +39,7 @@ defineProps({
 const isChecked = ref(false)
 
 watch(
-  () => modelValue,
+  () => props.modelValue,
   (newValue) => {
     isChecked.value = newValue
   },

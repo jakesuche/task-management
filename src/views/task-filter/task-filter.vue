@@ -25,9 +25,11 @@ const handleFilter = () => {
     <!-- Status Filter -->
     <div>
       <SelectInput
+        v-model="status"
         label="Status"
           class="min-w-[160px]"
         :options="[
+          { label: 'All', value: 'all' },
           { label: 'Pending', value: 'Pending' },
           { label: 'In Progress', value: 'In Progress' },
           { label: 'Completed', value: 'Completed' },
@@ -38,6 +40,7 @@ const handleFilter = () => {
     <!-- Priority Filter -->
     <div>
       <SelectInput
+       v-model="priority"
          class="min-w-[160px]"
         label="Priority"
         :options="[
@@ -52,6 +55,7 @@ const handleFilter = () => {
     <!-- Sort By Filter -->
     <div>
       <SelectInput
+        v-model="sortBy"
         :options="[
           { label: 'None', value: 'none' },
           { label: 'Due Date (Ascending) ', value: 'dueDate' },

@@ -16,11 +16,12 @@ import {
   TableHead,
   TableCell,
   TableCaption,
-} from "@/components/data/table.vue";
+} from '@/components/data/table.vue'
 import Badge from '@/components/misc/bagde.vue'
 // import Badge from '@/components/ui/Badge.vue'
 import { Edit2Icon, Trash2Icon } from 'lucide-vue-next'
-import Button from '@/components/button/button.vue';
+import Button from '@/components/button/button.vue'
+
 
 
 // Props definition
@@ -52,54 +53,13 @@ const getPriorityColor = (priority: string): string => {
       return 'bg-blue-500'
   }
 }
-
-let tasks = [
-  {
-    id: 1,
-    title: "Redesign website homepage",
-    description: "Update the layout and color scheme of the main landing page",
-    status: "In Progress",
-    priority: "High",
-    dueDate: "2024-11-20T12:00:00Z",
-  },
-  {
-    id: 2,
-    title: "Implement user authentication",
-    description: "Add login and registration functionality to the app",
-    status: "Pending",
-    priority: "High",
-    dueDate: "2024-11-22T15:00:00Z",
-  },
-  {
-    id: 3,
-    title: "Write API documentation",
-    description: "Create comprehensive documentation for the RESTful API",
-    status: "Completed",
-    priority: "Medium",
-    dueDate: "2024-11-18T09:00:00Z",
-  },
-  {
-    id: 4,
-    title: "Optimize database queries",
-    description: "Improve the performance of slow database queries",
-    status: "Pending",
-    priority: "Medium",
-    dueDate: "2024-11-25T14:00:00Z",
-  },
-  {
-    id: 5,
-    title: "Set up CI/CD pipeline",
-    description: "Configure automated testing and deployment process",
-    status: "In Progress",
-    priority: "High",
-    dueDate: "2024-11-21T11:00:00Z",
-  },
-]
 </script>
 
 <template>
-  <Table>
+  <div v-if="tasks.length > 0">
+    <Table>
     <!-- Table Header -->
+
     <TableHeader>
       <TableRow>
         <TableHead>Title</TableHead>
@@ -113,7 +73,7 @@ let tasks = [
 
     <!-- Table Body -->
     <TableBody>
-      <TableRow v-for="task in props.tasks" :key="task.id">
+      <TableRow v-for="task in props.tasks" :key="task?.id">
         <TableCell class="font-medium">{{ task.title }}</TableCell>
         <TableCell>{{ task.description }}</TableCell>
         <TableCell>
@@ -127,11 +87,18 @@ let tasks = [
           <Button variant="ghost" size="icon" @click="props.onEdit(task)">
             <Edit2Icon class="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="icon" @click="props.onDelete(task.id)">
-            <Trash2Icon class="h-4 w-4" />
-          </Button>
+
+             <Button variant="ghost" size="icon" @click="props.onDelete(task.id)">
+                <Trash2Icon class="h-4 w-4" />
+              </Button>
         </TableCell>
       </TableRow>
     </TableBody>
+
   </Table>
+  </div>
+  <div v-else>
+    <p>No data found</p>
+  </div>
+
 </template>

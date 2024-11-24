@@ -7,8 +7,14 @@
       :placeholder="placeholder"
       :value="value"
       @input="onInput"
+      :class="errorText && 'border-red-500'"
       class="block p-2.5 w-full text-sm text-gray-900  rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
     ></textarea>
+    <Transition name="slide-fade">
+      <span v-if="errorText" class="text-xs text-red-600">
+        {{ errorText }}
+      </span>
+    </Transition>
   </div>
 </template>
 
@@ -38,6 +44,7 @@ export default defineComponent({
       type: String as PropType<string>,
       default: '',
     },
+    errorText: String,
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {

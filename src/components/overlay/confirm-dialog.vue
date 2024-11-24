@@ -1,18 +1,40 @@
 <template>
-  <div v-if="confirmDialog.visible" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-      <h3 class="text-lg font-semibold mb-4">{{ confirmDialog.header }}</h3>
-      <p class="mb-6">{{ confirmDialog.message }}</p>
-      <div class="flex justify-end gap-2">
-        <button @click="rejectDialog" class="px-4 py-2 border rounded hover:bg-gray-200">{{ confirmDialog.rejectLabel }}</button>
-        <button @click="acceptDialog" :class="confirmDialog.acceptClass">{{ confirmDialog.acceptLabel }}</button>
+  <Transition
+    enter-active-class="transition duration-200 ease-out"
+    enter-from-class="translate-y-1 opacity-0"
+    enter-to-class="translate-y-0 opacity-100"
+    leave-active-class="transition duration-150 ease-in"
+    leave-from-class="translate-y-0 opacity-100"
+    leave-to-class="translate-y-1 opacity-0"
+  >
+    <div
+      v-if="store.dialog.visible"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+    >
+      <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+        <h3 class="text-lg font-semibold mb-4">{{ store.dialog.header }}</h3>
+        <p class="mb-6">{{ store.dialog.message }}</p>
+        <div class="flex justify-end gap-2">
+          <button
+            @click="store.reject"
+            class="px-4 py-2 border rounded hover:bg-gray-200"
+          >
+            {{ store.dialog.rejectLabel }}
+          </button>
+          <button
+            @click="store.accept"
+            :class="store.dialog.acceptClass"
+          >
+            {{ store.dialog.acceptLabel }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
-<script setup>
-import { useConfirm } from '../../composables/useConfirm';
+<script setup lang="ts">
+import { useConfirmation } from '@/stores/confirmation'
 
-const { confirmDialog, acceptDialog, rejectDialog } = useConfirm();
+const store = useConfirmation()
 </script>
