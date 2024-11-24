@@ -19,6 +19,7 @@ import { useTaskStore } from '@/stores/task'
 import { storeToRefs } from 'pinia'
 import TaskDetail from '@/views/task-detail/task-detail.vue'
 import { useConfirmation } from '@/stores/confirmation'
+import Container from '@/components/container/container.vue';
 
 // Importing the Task type
 
@@ -156,7 +157,7 @@ const handleTaskUpdate = (task: Task) => {
 </script>
 
 <template>
-  <div class="max-w-7xl xl:max-w-[1500px] mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+  <Container class="max-w-7xl xl:max-w-[1500px] mx-auto !bg-white rounded-xl shadow-lg overflow-hidden">
     <div class="p-8">
       <h1 class="text-3xl font-bold mb-6 text-gray-800">
         Task Management Dashboard
@@ -214,5 +215,5 @@ const handleTaskUpdate = (task: Task) => {
       :task="editingTask"
     />
 
-  </div>
+  </Container>
 </template>

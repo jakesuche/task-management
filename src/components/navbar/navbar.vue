@@ -1,6 +1,7 @@
 <template>
   <nav class="border-b border-gray-200 bg-white sticky">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <Container customClass="max-w-7xl xl:max-w-[1500px]" >
       <div class="flex justify-between h-16">
         <div class="flex">
           <div class="flex-shrink-0 flex items-center">
@@ -49,7 +50,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   </nav>
 </template>
 
@@ -57,6 +58,7 @@
 import { ref } from 'vue';
 import { Bell, User } from 'lucide-vue-next';
 import SearchInput from '../forms/search-input.vue';
+import Container from '../container/container.vue';
 
 const isUserMenuOpen = ref(false);
 </script>

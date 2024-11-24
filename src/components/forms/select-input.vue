@@ -15,7 +15,6 @@
         <span v-else class="text-sm text-surface-400">Select...</span>
 
       </div>
-
       <div class="ml-auto text-gray-600">
         <svg
           class="h-4 w-4"
@@ -38,11 +37,11 @@
         {{ errorText }}
       </span>
     </Transition>
-    <Transition @after-enter="scrollToBottom" name="dropdown">
+    <Transition  name="dropdown">
       <div
         ref="target"
         v-if="isOpen"
-        class="absolute mt-2 w-full bg-white border rounded-md shadow-lg z-10 origin-top-center overflow-hidden"
+        class="absolute mt-2 w-full bg-white border rounded-md shadow-lg z-10 origin-top-center dropdown-content overflow-hidden"
       >
         <div ref="dropdownContent" class="max-h-60 overflow-auto">
           <template v-for="item in options" :key="item.value">
@@ -60,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, type PropType, watch } from "vue";
+import { ref, type PropType, watch } from "vue";
 import { useClickOutside } from '@/composables/useClickOutside'
 
 interface Option {
@@ -87,7 +86,6 @@ const props = defineProps({
 
 const selectedItem = ref<Option | null>(null);
 const isOpen = ref(false);
-const searchQuery = ref("");
 const dropdownContent = ref<HTMLElement | null>(null);
 const emits = defineEmits(['update:modelValue']);
 const target = ref<HTMLElement | null>(null);
@@ -115,11 +113,7 @@ const selectItem = (item: Option) => {
 
 
 
-const scrollToBottom = () => {
-  if (dropdownContent.value) {
-    dropdownContent.value.scrollTop = dropdownContent.value.scrollHeight;
-  }
-};
+
 
 // Watch for external changes in modelValue and update selectedItem
 watch(() => props.modelValue, (newVal) => {
