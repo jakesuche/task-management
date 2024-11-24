@@ -113,7 +113,7 @@ let tasks = [
 
     <!-- Table Body -->
     <TableBody>
-      <TableRow v-for="task in tasks" :key="task.id">
+      <TableRow v-for="task in props.tasks" :key="task.id">
         <TableCell class="font-medium">{{ task.title }}</TableCell>
         <TableCell>{{ task.description }}</TableCell>
         <TableCell>

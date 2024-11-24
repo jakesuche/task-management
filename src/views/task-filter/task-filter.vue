@@ -3,12 +3,7 @@ import { ref } from 'vue'
 import Button from '@/components/button/button.vue'
 import SelectInput from '@/components/forms/select-input.vue'
 
-// Props Interface
-interface TaskFilterProps {
-  onFilter: (status: string, priority: string, sortBy: string) => void
-}
 
-const props = defineProps<TaskFilterProps>()
 
 const emit = defineEmits(['filter']);
 

@@ -29,7 +29,7 @@ watch(
   (newTask) => {
     if (newTask) {
       form.title = newTask.title
-      form.description = newTask.description
+      form.description = newTask.description!
       form.status = newTask.status
       form.priority = newTask.priority
       form.dueDate = new Date(newTask.dueDate).toISOString().split('T')[0]
@@ -63,6 +63,7 @@ const handleSubmit = (e: Event) => {
       <TextInput id="title" v-model="form.title" label="Title" />
       <TextArea label="Description" id="description" v-model="form.description" required />
       <SelectInput
+      v-model="form.status"
         :options="[
           { label: 'Pending', value: 'Pending' },
           { label: 'In Progress', value: 'In Progress' },
@@ -71,6 +72,7 @@ const handleSubmit = (e: Event) => {
         label="Select status"
       />
       <SelectInput
+      v-model="form.priority"
         :options="[
           { label: 'Low', value: 'Low' },
           { label: 'Medium', value: 'Medium' },
@@ -78,7 +80,7 @@ const handleSubmit = (e: Event) => {
         ]"
         label="Select priority"
       />
-      <TextInput type="date" id="title" v-model="form.title" label="Due Date" />
+      <TextInput type="date" id="title" v-model="form.dueDate" label="Due Date" />
       <Button type="submit" class="w-full">
         {{ props.task ? 'Update Task' : 'Add Task' }}
       </Button>

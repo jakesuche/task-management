@@ -3,7 +3,7 @@ defineOptions({
   name: 'TaskDashboard',
 })
 
-import { ref, onMounted, toRaw } from 'vue'
+import { ref, onMounted, toRaw, watch } from 'vue'
 import TaskFilter from '@/views/task-filter/task-filter.vue'
 import KanbarBoard from '../kanban-board/kanbar-board.vue'
 import TaskList from '@/views/task-list/task-list.vue'
@@ -18,17 +18,21 @@ import { endPointTask } from '@/util/end-points';
 
 // Reactive states
 const tasks = ref<Task[]>([])
-const filteredTasks = ref<Task[]>([])
+
 const isLoading = ref<boolean>(true)
 const error = ref<string | null>(null)
 const isFormOpen = ref<boolean>(false)
 const editingTask = ref<Task | null>(null)
 const dialogVisible = ref(false)
 const {data} = useFetch<Task[]>(endPointTask)
+const filteredTasks = ref<Task[] | null>(data.value)
 
-console.log(data.value)
 
-
+watch(data, (newData) => {
+  if (newData) {
+    filteredTasks.value = newData
+  }
+})
 
 const handleDialog = () => {
   dialogVisible.value = !dialogVisible.value
@@ -138,9 +142,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <pre>
-    {{ data }}
-  </pre>
   <div class="max-w-7xl xl:max-w-[1500px] mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
     <div class="p-8">
       <h1 class="text-3xl font-bold mb-6 text-gray-800">Task Management Dashboard</h1>
@@ -160,13 +161,13 @@ onMounted(() => {
       >
         <template #list>
           <TaskList
-            :tasks="filteredTasks"
-            @edit="(task) => (editingTask = task)"
+            :tasks="filteredTasks!"
+            @edit="(task) => {editingTask = task;  handleDialog(); }"
             @delete="handleDeleteTask"
           />
         </template>
         <template #board>
-          <KanbarBoard />
+          <KanbarBoard @edit="(task) => {editingTask = task;  handleDialog(); }" :tasks="filteredTasks!" />
         </template>
       </Tab>
       <!--
@@ -198,10 +199,10 @@ onMounted(() => {
     </div>
     <overlay-dialog />
     <TaskForm
-      @update:visible="dialogVisible = $event"
+      @update:visible="dialogVisible = $event;editingTask = null"
       @submit="editingTask ? handleUpdateTask : handleAddTask"
       @close="() => { dialogVisible = false; editingTask = null }"
-      :open="dialogVisible || !!editingTask"
+      :open="dialogVisible"
       :task="editingTask"
     />
   </div>

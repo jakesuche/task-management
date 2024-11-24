@@ -46,48 +46,6 @@ import { computed, ref } from 'vue';
 import {   VueDraggableNext as VueDraggable } from 'vue-draggable-next';
 import { Edit2Icon, Trash2Icon } from 'lucide-vue-next';
 
-let tasks = ref([
-  {
-    id: 1,
-    title: "Redesign website homepage",
-    description: "Update the layout and color scheme of the main landing page",
-    status: "In Progress",
-    priority: "High",
-    dueDate: "2024-11-20T12:00:00Z",
-  },
-  {
-    id: 2,
-    title: "Implement user authentication",
-    description: "Add login and registration functionality to the app",
-    status: "Pending",
-    priority: "High",
-    dueDate: "2024-11-22T15:00:00Z",
-  },
-  {
-    id: 3,
-    title: "Write API documentation",
-    description: "Create comprehensive documentation for the RESTful API",
-    status: "Completed",
-    priority: "Medium",
-    dueDate: "2024-11-18T09:00:00Z",
-  },
-  {
-    id: 4,
-    title: "Optimize database queries",
-    description: "Improve the performance of slow database queries",
-    status: "Pending",
-    priority: "Medium",
-    dueDate: "2024-11-25T14:00:00Z",
-  },
-  {
-    id: 5,
-    title: "Set up CI/CD pipeline",
-    description: "Configure automated testing and deployment process",
-    status: "In Progress",
-    priority: "High",
-    dueDate: "2024-11-21T11:00:00Z",
-  },
-])
 const props = defineProps<{
   tasks: Task[];
 }>();
@@ -101,7 +59,7 @@ const columns = [
 ];
 
 const getTasksForColumn = (columnId: string) => {
-  return computed(() => tasks.value.filter(task => task.status === columnId));
+  return computed(() => props?.tasks?.filter(task => task.status === columnId));
 };
 
 const getStatusColor = (status: string) => {
@@ -128,14 +86,14 @@ const getPriorityColor = (priority: string) => {
 
 const onDragChange = (evt: any, columnId: string) => {
   if (evt.added || evt.moved) {
-    const updatedTasks = tasks.value.map(task => {
+    const updatedTasks = props.tasks.map(task => {
       if (task.id === evt.added?.element.id || task.id === evt.moved?.element.id) {
         return { ...task, status: columnId };
       }
       return task;
     });
 
-    tasks.value =  updatedTasks
+    // tasks.value =  updatedTasks
     emit('update:tasks', updatedTasks);
   }
 };
