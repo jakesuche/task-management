@@ -1,8 +1,51 @@
+
 # Task Management Application
 
-The **Task Management Application** is a simple yet powerful tool to manage and track tasks. It features a Kanban board with drag-and-drop functionality to help visualize and update task progress. The application uses **JSON Server** for a mock backend, allowing for easy local development and testing.
+This is a **Task Management Application** built using Vue 3 and a mock JSON server. The app provides features like task management, Kanban board functionality with drag-and-drop support, and a clean, responsive UI. 
 
 ---
+
+## Tools and Technologies
+
+### Frontend
+- **Vue 3**: Progressive JavaScript framework for building the user interface.
+- **TypeScript**: Type-safe language for JavaScript development.
+- **Pinia**: State management library for managing application state.
+- **Vee-Validate + Zod**: Libraries for robust and schema-based form validation.
+- **TailwindCSS**: Utility-first CSS framework for responsive and modern styling.
+- **Vue Draggable**: Library for enabling drag-and-drop functionality in the Kanban board.
+
+### Backend
+- **JSON Server**: Provides a mock backend for API testing.
+
+### Development Tools
+- **Vite**: Build tool and development server for fast performance.
+- **ESLint**: Ensures code consistency through linting.
+- **Prettier**: Code formatter for clean and uniform code.
+- **Vitest**: Lightweight unit testing framework.
+
+---
+
+
+# Available Scripts
+
+The project provides several useful scripts to streamline development, build, testing, and code quality processes.
+
+## Scripts and Their Descriptions
+
+| Script             | Description                                      |
+|--------------------|--------------------------------------------------|
+| `npm run dev`      | Starts the development server using **Vite**.    |
+| `npm run build`    | Builds the application for production.           |
+| `npm run mock`     | Starts the **JSON Server** on `http://localhost:8080`. |
+| `npm run lint`     | Lints and fixes code issues using **ESLint**.    |
+| `npm run format`   | Formats code to ensure consistency using **Prettier**. |
+| `npm run test:unit`| Runs unit tests with **Vitest**.                 |
+
+## Usage
+
+### Development
+To start the development server and begin working on the application:
 
 ## Features
 
@@ -94,51 +137,3 @@ src/
 └── main.ts           # Application entry point
 
 ```
-
-# Task Management Application
-
-This is a **Task Management Application** built using Vue 3 and a mock JSON server. The app provides features like task management, Kanban board functionality with drag-and-drop support, and a clean, responsive UI. 
-
----
-
-## Tools and Technologies
-
-### Frontend
-- **Vue 3**: Progressive JavaScript framework for building the user interface.
-- **TypeScript**: Type-safe language for JavaScript development.
-- **Pinia**: State management library for managing application state.
-- **Vee-Validate + Zod**: Libraries for robust and schema-based form validation.
-- **TailwindCSS**: Utility-first CSS framework for responsive and modern styling.
-- **Vue Draggable**: Library for enabling drag-and-drop functionality in the Kanban board.
-
-### Backend
-- **JSON Server**: Provides a mock backend for API testing.
-
-### Development Tools
-- **Vite**: Build tool and development server for fast performance.
-- **ESLint**: Ensures code consistency through linting.
-- **Prettier**: Code formatter for clean and uniform code.
-- **Vitest**: Lightweight unit testing framework.
-
----
-
-
-# Available Scripts
-
-The project provides several useful scripts to streamline development, build, testing, and code quality processes.
-
-## Scripts and Their Descriptions
-
-| Script             | Description                                      |
-|--------------------|--------------------------------------------------|
-| `npm run dev`      | Starts the development server using **Vite**.    |
-| `npm run build`    | Builds the application for production.           |
-| `npm run mock`     | Starts the **JSON Server** on `http://localhost:8080`. |
-| `npm run lint`     | Lints and fixes code issues using **ESLint**.    |
-| `npm run format`   | Formats code to ensure consistency using **Prettier**. |
-| `npm run test:unit`| Runs unit tests with **Vitest**.                 |
-
-## Usage
-
-### Development
-To start the development server and begin working on the application:
