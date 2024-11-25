@@ -4,7 +4,7 @@
       "id": "1",
       "title": "Implement user authenticationb",
       "description": "Update the layout and color scheme of the main landing page",
-      "status": "Pending",
+      "status": "In Progress",
       "priority": "Medium",
       "dueDate": "2024-11-15",
       "assignee": {
@@ -48,7 +48,7 @@
       "id": "3",
       "title": "Write API documentation",
       "description": "Create comprehensive documentation for the RESTful API",
-      "status": "In Progress",
+      "status": "Completed",
       "priority": "Medium",
       "dueDate": "2024-11-15",
       "assignee": {
@@ -92,7 +92,7 @@
       "id": "4",
       "title": "Write API documentation",
       "description": "Create comprehensive documentation for the RESTful API",
-      "status": "Completed",
+      "status": "Pending",
       "priority": "Medium",
       "dueDate": "2024-11-15",
       "assignee": {
@@ -136,7 +136,7 @@
       "id": "1059",
       "title": "Implement user authenticationb",
       "description": "Implement user authenticationb",
-      "status": "In Progress",
+      "status": "Pending",
       "priority": "Low",
       "dueDate": "2024-11-15",
       "assignee": {
