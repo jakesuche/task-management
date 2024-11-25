@@ -73,8 +73,7 @@ describe('InputComponent', () => {
 
       await input.setValue('new value')
       expect(wrapper.emitted('update:modelValue')).toBeTruthy()
-       expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['new value'])
-
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['new value'])
     })
 
     it('emits blur event when input loses focus', async () => {

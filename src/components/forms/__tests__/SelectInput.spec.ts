@@ -54,7 +54,6 @@ describe('DropdownComponent', () => {
     // Open dropdown
     await wrapper.find('.cursor-pointer').trigger('click')
 
-
     // Click first option
     const options = wrapper.findAll('.dropdown-content .cursor-pointer')
     await options[0].trigger('click')
@@ -118,7 +117,6 @@ describe('DropdownComponent', () => {
     expect(wrapper.find('.dropdown-content').exists()).toBe(false)
   })
 
-
   it('displays errorText when provided', () => {
     const wrapper = mountComponent({
       errorText: 'This field is required',
@@ -126,5 +124,4 @@ describe('DropdownComponent', () => {
     expect(wrapper.text()).toContain('This field is required')
     expect(wrapper.find('.text-red-600').exists()).toBe(true)
   })
-
 })

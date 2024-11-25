@@ -24,13 +24,11 @@ describe('useMutation', () => {
         typeof mockResponse
       >('/test', 'POST')
 
-
       expect(isPending.value).toBe(false)
       expect(isSuccess.value).toBe(false)
       expect(isError.value).toBe(false)
       expect(data.value).toBeNull()
       expect(error.value).toBeNull()
-
 
       const payload = { name: 'Test' }
       mutate(payload)
@@ -38,7 +36,6 @@ describe('useMutation', () => {
       expect(isPending.value).toBe(true)
 
       await flushPromises()
-
 
       expect(isPending.value).toBe(false)
       expect(isSuccess.value).toBe(true)

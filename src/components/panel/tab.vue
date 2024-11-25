@@ -14,11 +14,7 @@
         "
       >
         <!-- Icon -->
-        <component
-          v-if="tab.icon"
-          :is="tab.icon"
-          class="w-4 h-4 mr-2"
-        />
+        <component v-if="tab.icon" :is="tab.icon" class="w-4 h-4 mr-2" />
         <!-- Label -->
         {{ tab.label }}
       </button>
@@ -32,25 +28,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type FunctionalComponent, type PropType } from "vue";
+import { ref, type FunctionalComponent, type PropType } from 'vue'
 
 // Define the tab properties
 type Props = {
-  tabs: { label: string; name: string; icon:FunctionalComponent }[];
-};
+  tabs: { label: string; name: string; icon: FunctionalComponent }[]
+}
 
 const props = defineProps({
   tabs: {
-    type: Array as PropType<Props["tabs"]>,
+    type: Array as PropType<Props['tabs']>,
     required: true,
   },
   defaultTab: {
     type: Number,
     default: 0,
   },
-});
+})
 
-const activeTab = ref(props.defaultTab);
+const activeTab = ref(props.defaultTab)
 </script>
 
 <style scoped>

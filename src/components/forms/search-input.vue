@@ -18,34 +18,33 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import { Search } from 'lucide-vue-next';
+import { ref, watch } from 'vue'
+import { Search } from 'lucide-vue-next'
 
 const props = defineProps<{
-  modelValue?: string;
-  placeholder?: string;
-  iconPosition?: "left" | "right";
-  inputClass?: string;
-}>();
+  modelValue?: string
+  placeholder?: string
+  iconPosition?: 'left' | 'right'
+  inputClass?: string
+}>()
 
-const inputValue = ref(props.modelValue);
+const inputValue = ref(props.modelValue)
 
 // Watch for changes in the modelValue prop and update the input value accordingly
 watch(
   () => props.modelValue,
   (newValue) => {
-    inputValue.value = newValue;
-  }
-);
+    inputValue.value = newValue
+  },
+)
 
 // Emit an update event whenever the input value changes
 watch(inputValue, (newValue) => {
-  emit("update:modelValue", newValue);
-});
+  emit('update:modelValue', newValue)
+})
 
-const emit = defineEmits(["update:modelValue", "enter"]);
-const handleEnter = (e: KeyboardEvent) => e.key === "Enter" && emit("enter");
-
+const emit = defineEmits(['update:modelValue', 'enter'])
+const handleEnter = (e: KeyboardEvent) => e.key === 'Enter' && emit('enter')
 </script>
 
 <style scoped>

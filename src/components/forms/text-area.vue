@@ -9,7 +9,7 @@
       :value="value"
       @input="onInput"
       :class="errorText && 'border-red-500'"
-      class="block p-2.5 w-full text-sm text-gray-900  rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+      class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
     ></textarea>
     <Transition name="slide-fade">
       <span v-if="errorText" class="text-xs text-red-600">
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, type PropType } from 'vue';
+import { defineComponent, toRefs, type PropType } from 'vue'
 
 export default defineComponent({
   name: 'TextAreaComponent',
@@ -49,19 +49,17 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const { modelValue } = toRefs(props);
+    const { modelValue } = toRefs(props)
 
     const onInput = (event: Event) => {
-      const target = event.target as HTMLTextAreaElement;
-      emit('update:modelValue', target.value);
-    };
+      const target = event.target as HTMLTextAreaElement
+      emit('update:modelValue', target.value)
+    }
 
     return {
       value: modelValue,
       onInput,
-    };
+    }
   },
-});
+})
 </script>
-
-

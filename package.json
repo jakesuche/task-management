@@ -12,7 +12,8 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "mock": "json-server --watch db.json --port 8080"
+    "mock": "json-server --watch db.json --port 8080",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.60.6",

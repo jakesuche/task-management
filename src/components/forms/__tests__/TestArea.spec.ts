@@ -182,5 +182,4 @@ describe('TextAreaComponent', () => {
       expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([multilineText])
     })
   })
-
 })

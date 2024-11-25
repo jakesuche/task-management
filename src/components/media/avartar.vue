@@ -1,11 +1,6 @@
 <template>
   <div class="flex items-center">
-    <img
-      v-if="src"
-      class="w-10 h-10 rounded-full"
-      :src="props?.src"
-      :alt="props?.name"
-    />
+    <img v-if="src" class="w-10 h-10 rounded-full" :src="props?.src" :alt="props?.name" />
 
     <div
       v-else
@@ -13,23 +8,24 @@
     >
       {{ initials }}
     </div>
-    <span v-show="show_name" class="ml-3 text-sm font-medium text-gray-700">{{
-      name
-    }}</span>
+    <span v-show="show_name" class="ml-3 text-sm font-medium text-gray-700">{{ name }}</span>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-const props = defineProps<{ src?: string; name?: string; show_name?: boolean }>();
+const props = defineProps<{ src?: string; name?: string; show_name?: boolean }>()
 
 const initials = computed(() => {
   if (props?.name) {
-     const cleanName = props.name.trim().replace(/\s+/g, ' ');
-    const names = cleanName.split(' ');
-    return names.slice(0, 2).map(n => n[0]).join('');
+    const cleanName = props.name.trim().replace(/\s+/g, ' ')
+    const names = cleanName.split(' ')
+    return names
+      .slice(0, 2)
+      .map((n) => n[0])
+      .join('')
   }
   return ''
-});
+})
 </script>

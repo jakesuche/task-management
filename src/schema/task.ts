@@ -1,7 +1,6 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 
-
 // Define the schema for a subtask
 const SubTaskSchema = z.object({
   id: z.string().optional(),
@@ -46,13 +45,9 @@ export const Schema = z.object({
   attachments: z.array(AttachmentSchema).default([]),
 })
 
-
 export type TaskSchemaProps = z.infer<typeof Schema>
 
-
 export const TaskSchema = toTypedSchema(Schema)
-
-
 
 // Example usage:
 export const initialTask = {
@@ -96,5 +91,3 @@ export const initialTask = {
     },
   ],
 }
-
-

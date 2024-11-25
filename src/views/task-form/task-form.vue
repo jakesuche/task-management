@@ -5,7 +5,7 @@ import TextInput from '@/components/forms/text-input.vue'
 import TextArea from '@/components/forms/text-area.vue'
 import Button from '@/components/button/button.vue'
 import ModalDialog from '@/components/overlay/dialog.vue'
-import {  useField, useForm } from "vee-validate";
+import { useField, useForm } from 'vee-validate'
 import { initialTask, TaskSchema, type TaskSchemaProps } from '@/schema/task'
 import { generateRandomId } from '@/util/common'
 
@@ -16,22 +16,17 @@ interface TaskFormProps {
 }
 const props = defineProps<TaskFormProps>()
 
-
 const emits = defineEmits(['submit'])
-const {handleSubmit,errors} = useForm<TaskSchemaProps>({
-  validationSchema:TaskSchema,
-  initialValues:initialTask
+const { handleSubmit, errors } = useForm<TaskSchemaProps>({
+  validationSchema: TaskSchema,
+  initialValues: initialTask,
 })
 
-
-const { value: title } = useField<string>('title');
-const { value: description } = useField<string>("description");
-const { value: status } = useField<string>("status");
-const { value: priority } = useField<string>("priority");
-const { value: dueDate } = useField<string>("dueDate");
-
-
-
+const { value: title } = useField<string>('title')
+const { value: description } = useField<string>('description')
+const { value: status } = useField<string>('status')
+const { value: priority } = useField<string>('priority')
+const { value: dueDate } = useField<string>('dueDate')
 
 const form = reactive({
   title: props.task?.title || '',
@@ -57,7 +52,7 @@ watch(
 
 // Handle form submission
 
-const onSubmit = handleSubmit((value)=> {
+const onSubmit = handleSubmit((value) => {
   value.id = generateRandomId().toString()
   emits('submit', value)
 })
@@ -72,10 +67,16 @@ const onSubmit = handleSubmit((value)=> {
   >
     <form @submit="onSubmit" class="space-y-4">
       <TextInput :errorText="errors.title" id="title" v-model="title" label="Title" />
-      <TextArea :errorText="errors.description" label="Description" id="description" v-model="description" required />
+      <TextArea
+        :errorText="errors.description"
+        label="Description"
+        id="description"
+        v-model="description"
+        required
+      />
       <SelectInput
-      :errorText="errors.status"
-      v-model="status"
+        :errorText="errors.status"
+        v-model="status"
         :options="[
           { label: 'Pending', value: 'Pending' },
           { label: 'In Progress', value: 'In Progress' },
@@ -84,8 +85,8 @@ const onSubmit = handleSubmit((value)=> {
         label="Select status"
       />
       <SelectInput
-      :errorText="errors.priority"
-      v-model="priority"
+        :errorText="errors.priority"
+        v-model="priority"
         :options="[
           { label: 'Low', value: 'Low' },
           { label: 'Medium', value: 'Medium' },
@@ -93,7 +94,13 @@ const onSubmit = handleSubmit((value)=> {
         ]"
         label="Select priority"
       />
-      <TextInput :errorText="errors.dueDate" type="date" id="title" v-model="dueDate" label="Due Date" />
+      <TextInput
+        :errorText="errors.dueDate"
+        type="date"
+        id="title"
+        v-model="dueDate"
+        label="Due Date"
+      />
       <Button type="submit" class="w-full">
         {{ props.task ? 'Update Task' : 'Add Task' }}
       </Button>

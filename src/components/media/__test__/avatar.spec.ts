@@ -155,7 +155,7 @@ describe('Avatar Component', () => {
     //   const wrapper = mount(Avatar)
     //   expect(() => wrapper.vm.initials).not.toThrow()
     // })
-//
+    //
     it('handles names with special characters', () => {
       const wrapper = mountComponent({
         name: 'María-José García',

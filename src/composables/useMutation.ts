@@ -1,10 +1,5 @@
-
-
-import { BASE_URL } from "@/util/constants"
-import { ref } from "vue"
-
-
-
+import { BASE_URL } from '@/util/constants'
+import { ref } from 'vue'
 
 export function useMutation<TPayload, TResponse>(
   url: string | (() => string), // Allow static or dynamic URLs

@@ -3,7 +3,7 @@ defineOptions({
   name: 'TaskDashboard',
 })
 
-import {  ref } from 'vue'
+import { ref } from 'vue'
 import TaskFilter from '@/views/task-filter/task-filter.vue'
 import KanbarBoard from '../kanban-board/kanbar-board.vue'
 import TaskList from '@/views/task-list/task-list.vue'
@@ -19,7 +19,7 @@ import { useTaskStore } from '@/stores/task'
 import { storeToRefs } from 'pinia'
 import TaskDetail from '@/views/task-detail/task-detail.vue'
 import { useConfirmation } from '@/stores/confirmation'
-import Container from '@/components/container/container.vue';
+import Container from '@/components/container/container.vue'
 
 // Importing the Task type
 
@@ -29,23 +29,19 @@ const { addToast } = useToast()
 const editingTask = ref<Task | null>(null)
 const dialogVisible = ref(false)
 const detailsDialog = ref(false)
-const {isLoading } = useFetch<Task[]>(endPointTask)
+const { isLoading } = useFetch<Task[]>(endPointTask)
 const selectedTask = ref<null | Task>(null)
 const taskStore = useTaskStore()
-const { tasks} = storeToRefs(taskStore)
+const { tasks } = storeToRefs(taskStore)
 const confirmationStore = useConfirmation()
 
 const createUpdateTaskMutation = (taskId: number) => {
-
   return useMutation<{}, Task>(`${endPointTask}/${taskId}`, 'PUT')
 }
 
 const createDeleteMutation = (taskId: number) => {
   return useMutation<{}, Task>(`${endPointTask}/${taskId}`, 'DELETE')
 }
-
-
-
 
 const { mutate } = useMutation<{}, Task>(endPointTask, 'POST', {
   onSuccess(data) {
@@ -54,8 +50,6 @@ const { mutate } = useMutation<{}, Task>(endPointTask, 'POST', {
     taskStore.addTask(data)
   },
 })
-
-
 
 const handleDialog = () => {
   dialogVisible.value = !dialogVisible.value
@@ -66,16 +60,14 @@ const handleAddTask = async (newTask: Omit<Task, 'id'>): Promise<void> => {
   mutate(newTask)
 }
 
-
-
 // Delete a task
 const handleDeleteTask = async (id: number): Promise<void> => {
   confirmationStore.show({
     onAccept() {
-     taskStore.removeTask(id)
-      const {mutate:deleteTask} = createDeleteMutation(id)
+      taskStore.removeTask(id)
+      const { mutate: deleteTask } = createDeleteMutation(id)
       deleteTask()
-      addToast({summary:'Task removed', 'severity':'success'})
+      addToast({ summary: 'Task removed', severity: 'success' })
     },
   })
 }
@@ -91,7 +83,7 @@ const handleDragEnd = async (result: Task[]): Promise<void> => {
   const updatePromises = result.map((task) => {
     const { mutate } = useMutation<Task, Task>(
       `/tasks/${task.id}`, // Dynamic URL for each task
-      'PUT'
+      'PUT',
     )
     return new Promise<void>((resolve, reject) => {
       mutate(task, {
@@ -106,21 +98,16 @@ const handleDragEnd = async (result: Task[]): Promise<void> => {
   })
   try {
     await Promise.all(updatePromises)
-    addToast({severity:'success',summary:'Task updated successfully'})
+    addToast({ severity: 'success', summary: 'Task updated successfully' })
   } catch (error) {
-    addToast({severity:'success',summary:`Task failed'${error}`})
+    addToast({ severity: 'success', summary: `Task failed'${error}` })
   }
-
-
 }
 
 const handleSelectTask = (task: Task) => {
   selectedTask.value = task
   detailsDialog.value = true
 }
-
-
-
 
 const handleTaskUpdate = (task: Task) => {
   const { mutate: update } = createUpdateTaskMutation(task.id)
@@ -140,11 +127,11 @@ const handleTaskUpdate = (task: Task) => {
 </script>
 
 <template>
-  <Container class="max-w-7xl xl:max-w-[1500px] mx-auto !bg-white rounded-xl shadow-lg overflow-hidden">
-    <div class="p-8">
-      <h1 class="text-3xl font-bold mb-6 text-gray-800">
-        Task Management Dashboard
-      </h1>
+  <Container
+    class="max-w-7xl xl:max-w-[1500px] mx-auto !bg-white rounded-xl shadow-lg overflow-hidden !p-1"
+  >
+    <div class="p-2 md:p-8">
+      <h1 class="text-xl font-bold mb-6 text-gray-800 md:text-3xl">Task Management Dashboard</h1>
       <div class="mb-6">
         <TaskFilter @filter="handleFilter" />
       </div>
@@ -161,19 +148,20 @@ const handleTaskUpdate = (task: Task) => {
         ]"
       >
         <template #list>
-            <div v-if="isLoading">
-              loading
-            </div>
+          <div v-if="isLoading">loading</div>
           <TaskList v-else :tasks="tasks" @edit="handleSelectTask" @delete="handleDeleteTask" />
         </template>
         <template #board>
-           <div v-if="isLoading">
-              loading
-            </div>
-          <KanbarBoard @update:tasks="handleDragEnd" v-else @delete="handleDeleteTask" @edit="handleSelectTask" :tasks="tasks" />
+          <div v-if="isLoading">loading</div>
+          <KanbarBoard
+            @update:tasks="handleDragEnd"
+            v-else
+            @delete="handleDeleteTask"
+            @edit="handleSelectTask"
+            :tasks="tasks"
+          />
         </template>
       </Tab>
-
     </div>
     <overlay-dialog />
     <TaskDetail
@@ -197,6 +185,5 @@ const handleTaskUpdate = (task: Task) => {
       :open="dialogVisible"
       :task="editingTask"
     />
-
   </Container>
 </template>

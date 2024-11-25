@@ -1,10 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { useFetch } from '@/composables/useFetch'
 import { BASE_URL } from '@/util/constants'
-import { flushPromises  } from '@vue/test-utils'
+import { flushPromises } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { useTaskStore } from '@/stores/task'
-
 
 // Mock fetch globally
 const mockFetch = vi.fn()
@@ -286,5 +285,3 @@ describe('useFetch', () => {
 //     expect(mockFetch).toHaveBeenCalledTimes(2)
 //   })
 // })
-
-

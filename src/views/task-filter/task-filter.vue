@@ -3,9 +3,7 @@ import { ref } from 'vue'
 import Button from '@/components/button/button.vue'
 import SelectInput from '@/components/forms/select-input.vue'
 
-
-
-const emit = defineEmits(['filter']);
+const emit = defineEmits(['filter'])
 
 // Reactive State
 const status = ref<string>('all')
@@ -14,9 +12,12 @@ const sortBy = ref<string>('none')
 
 // Emit the filter values to parent
 const handleFilter = () => {
- emit('filter', status.value === 'all' ? '' : status.value,
+  emit(
+    'filter',
+    status.value === 'all' ? '' : status.value,
     priority.value === 'all' ? '' : priority.value,
-    sortBy.value === 'none' ? '' : sortBy.value);
+    sortBy.value === 'none' ? '' : sortBy.value,
+  )
 }
 </script>
 
@@ -27,7 +28,7 @@ const handleFilter = () => {
       <SelectInput
         v-model="status"
         label="Status"
-          class="min-w-[160px]"
+        class="min-w-[160px]"
         :options="[
           { label: 'All', value: 'all' },
           { label: 'Pending', value: 'Pending' },
@@ -40,8 +41,8 @@ const handleFilter = () => {
     <!-- Priority Filter -->
     <div>
       <SelectInput
-       v-model="priority"
-         class="min-w-[160px]"
+        v-model="priority"
+        class="min-w-[160px]"
         label="Priority"
         :options="[
           { label: 'All', value: 'all' },
@@ -61,7 +62,7 @@ const handleFilter = () => {
           { label: 'Due Date (Ascending) ', value: 'dueDate' },
           { label: 'Due Date (Descending)', value: 'dueDateDesc ' },
         ]"
-         class="min-w-[160px]"
+        class="min-w-[160px]"
         label="Sort By"
       />
     </div>

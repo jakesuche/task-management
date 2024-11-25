@@ -5,7 +5,7 @@
     </label>
     <div
       ref="toggle"
-      class="border rounded-lg p-2.5 flex items-center cursor-pointer justify-between "
+      class="border rounded-lg p-2.5 flex items-center cursor-pointer justify-between"
       :class="errorText && 'border-red-500'"
       @click="toggleDropdown"
     >
@@ -13,7 +13,6 @@
         <span v-if="selectedItem" class="text-sm text-primary-600">{{ selectedItem.label }} </span>
         <span class="text-sm text-primary-600" v-else-if="modelValue">{{ modelValue }}</span>
         <span v-else class="text-sm text-surface-400">Select...</span>
-
       </div>
       <div class="ml-auto text-gray-600">
         <svg
@@ -32,12 +31,12 @@
         </svg>
       </div>
     </div>
-     <Transition name="slide-fade">
+    <Transition name="slide-fade">
       <span v-if="errorText" class="text-xs text-red-600">
         {{ errorText }}
       </span>
     </Transition>
-    <Transition  name="dropdown">
+    <Transition name="dropdown">
       <div
         ref="target"
         v-if="isOpen"
@@ -59,73 +58,77 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType, watch } from "vue";
+import { ref, type PropType, watch } from 'vue'
 import { useClickOutside } from '@/composables/useClickOutside'
 
 interface Option {
-  label: string;
-  value: string;
+  label: string
+  value: string
 }
 
 const props = defineProps({
   label: {
     type: String as PropType<string>,
-    default: ""
+    default: '',
   },
   modelValue: {
     type: String as PropType<string>,
-    default: ""
+    default: '',
   },
   options: {
     type: Array as PropType<Option[]>,
-    default: () => [{label: 'Label 1', value: 'value1'}, {label: 'Label 2', value: 'value2'}]
+    default: () => [
+      { label: 'Label 1', value: 'value1' },
+      { label: 'Label 2', value: 'value2' },
+    ],
   },
-  disabled:Boolean,
-  errorText:String
-});
+  disabled: Boolean,
+  errorText: String,
+})
 
-const selectedItem = ref<Option | null>(null);
-const isOpen = ref(false);
-const dropdownContent = ref<HTMLElement | null>(null);
-const emits = defineEmits(['update:modelValue']);
-const target = ref<HTMLElement | null>(null);
+const selectedItem = ref<Option | null>(null)
+const isOpen = ref(false)
+const dropdownContent = ref<HTMLElement | null>(null)
+const emits = defineEmits(['update:modelValue'])
+const target = ref<HTMLElement | null>(null)
 const toggle = ref<HTMLElement | null>(null)
 
-
-
 useClickOutside(target, (e) => {
-  const clickedInsideToggle = toggle.value && toggle.value.contains(e.target as Node);
+  const clickedInsideToggle = toggle.value && toggle.value.contains(e.target as Node)
   if (!clickedInsideToggle) {
-    isOpen.value = false;
+    isOpen.value = false
   }
-});
+})
 
 const toggleDropdown = () => {
-  if(props.disabled) {return}
-  isOpen.value = !isOpen.value;
-};
+  if (props.disabled) {
+    return
+  }
+  isOpen.value = !isOpen.value
+}
 
 const selectItem = (item: Option) => {
-  selectedItem.value = item;
-  emits('update:modelValue', item.value);
-  isOpen.value = false;
-};
-
-
-
-
+  selectedItem.value = item
+  emits('update:modelValue', item.value)
+  isOpen.value = false
+}
 
 // Watch for external changes in modelValue and update selectedItem
-watch(() => props.modelValue, (newVal) => {
-  selectedItem.value = props.options.find(option => option.value === newVal) || null;
-});
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    selectedItem.value = props.options.find((option) => option.value === newVal) || null
+  },
+)
 </script>
 
 <style scoped>
 /* Animations for dropdown */
 .dropdown-enter-active,
 .dropdown-leave-active {
-  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transition:
+    transform 0.2s ease-out,
+    opacity 0.2s ease-out;
 }
 
 .dropdown-enter-from,

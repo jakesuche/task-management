@@ -30,9 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
-
+import { computed } from 'vue'
 
 const props = defineProps({
   label: String,
@@ -49,25 +47,17 @@ const props = defineProps({
     default: false,
   },
   errorText: String,
-});
+})
 
-
-
-const emit = defineEmits([
-  "update:modelValue",
-  "blur",
-  "focus",
-  "update:value",
-  "enter",
-]);
+const emit = defineEmits(['update:modelValue', 'blur', 'focus', 'update:value', 'enter'])
 const computedType = computed(() => {
-  return props.type;
-});
+  return props.type
+})
 const handleChange = ({ target }: Event) =>
-  emit("update:modelValue", (target as HTMLInputElement).value);
-const handleBlur = (e: Event) => emit("blur", e);
-const handleFocus = (e: Event) => emit("focus", e);
-const handleEnter = (e: KeyboardEvent) => e.key === "Enter" && emit("enter");
+  emit('update:modelValue', (target as HTMLInputElement).value)
+const handleBlur = (e: Event) => emit('blur', e)
+const handleFocus = (e: Event) => emit('focus', e)
+const handleEnter = (e: KeyboardEvent) => e.key === 'Enter' && emit('enter')
 </script>
 
 <style scoped>

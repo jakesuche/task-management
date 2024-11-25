@@ -6,11 +6,8 @@ export const useTaskStore = defineStore('task', () => {
   const getAllTasks = computed(() => tasks.value)
   const initialTasks = ref<Task[]>([])
 
-
-
   const addTask = (data: Task) => {
     tasks.value.push(data)
-
   }
 
   const setTask = (data: Task[]) => {
@@ -31,28 +28,30 @@ export const useTaskStore = defineStore('task', () => {
 
     if (index !== -1) {
       tasks.value = [...tasks.value.slice(0, index), ...tasks.value.slice(index + 1)]
-    } 
+    }
   }
 
   const applyFilters = (status?: string, priority?: string, sortBy?: string) => {
-      let filtered = initialTasks.value.filter((task) => {
-        const statusFilter = status ? task.status === status : true
+    let filtered = initialTasks.value.filter((task) => {
+      const statusFilter = status ? task.status === status : true
 
-        const priorityFilter = priority ? task.priority.toLowerCase().trim() === priority.toLowerCase().trim() : true
-        return statusFilter && priorityFilter
-      })
-      if (sortBy) {
-        if (sortBy === 'dueDate') {
-          filtered = filtered.sort(
-            (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime(),
-          )
-        } else if (sortBy === 'dueDateDesc') {
-          filtered = filtered.sort(
-            (a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime(),
-          )
-        }
+      const priorityFilter = priority
+        ? task.priority.toLowerCase().trim() === priority.toLowerCase().trim()
+        : true
+      return statusFilter && priorityFilter
+    })
+    if (sortBy) {
+      if (sortBy === 'dueDate') {
+        filtered = filtered.sort(
+          (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime(),
+        )
+      } else if (sortBy === 'dueDateDesc') {
+        filtered = filtered.sort(
+          (a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime(),
+        )
       }
-      tasks.value = filtered
+    }
+    tasks.value = filtered
   }
 
   return { tasks: getAllTasks, setTask, addTask, updateTask, removeTask, applyFilters }

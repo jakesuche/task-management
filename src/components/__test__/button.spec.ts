@@ -145,7 +145,6 @@ describe('ButtonComponent', () => {
         top: 0,
       })
 
-
       await wrapper.trigger('click')
       expect(wrapper.find('.ripple').exists()).toBe(true)
       vi.advanceTimersByTime(600)

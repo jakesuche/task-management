@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps , defineOptions, watch } from 'vue'
+import { ref, defineProps, defineOptions, watch } from 'vue'
 import { CheckIcon } from 'lucide-vue-next'
 
 defineOptions({

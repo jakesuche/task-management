@@ -71,25 +71,20 @@ describe('KanbanBoard', () => {
   })
 
   it('renders tasks in correct columns', () => {
-
     const getTasksForColumn = (columnId: string) => {
       return mockTasks.filter((task) => task.status === columnId)
     }
 
-      const pendingTasks = getTasksForColumn('Pending')
-      const inProgressTasks = getTasksForColumn('In Progress')
-      const completedTasks = getTasksForColumn('Completed')
-
-
+    const pendingTasks = getTasksForColumn('Pending')
+    const inProgressTasks = getTasksForColumn('In Progress')
+    const completedTasks = getTasksForColumn('Completed')
 
     expect(pendingTasks).toHaveLength(1)
     expect(inProgressTasks).toHaveLength(1)
     expect(completedTasks).toHaveLength(1)
   })
 
-  it('applies correct status colors', () => {
-
-  })
+  it('applies correct status colors', () => {})
 
   it('applies correct priority colors', () => {
     const getPriorityColor = (priority: string) => {
@@ -130,36 +125,36 @@ describe('KanbanBoard', () => {
     expect(wrapper.emitted('delete')?.[0][0]).toBe(mockTasks[0].id)
   })
 
- it('handles drag and drop between columns', () => {
-   const tasks = [...mockTasks] // Clone the mockTasks
-   const onDragChange = (evt: { added: Event, moved:Event }, columnId: string) => {
-     if (evt.added || evt.moved) {
-       const updatedTasks = tasks.map((task) => {
-         if (task.id === evt.added?.element.id || task.id === evt.moved?.element.id) {
-           return { ...task, status: columnId }
-         }
-         return task
-       })
+  it('handles drag and drop between columns', () => {
+    const tasks = [...mockTasks] // Clone the mockTasks
+    const onDragChange = (evt: { added: Event; moved: Event }, columnId: string) => {
+      if (evt.added || evt.moved) {
+        const updatedTasks = tasks.map((task) => {
+          if (task.id === evt.added?.element.id || task.id === evt.moved?.element.id) {
+            return { ...task, status: columnId }
+          }
+          return task
+        })
 
-       wrapper.vm.$emit('update:tasks', updatedTasks)
-     }
-   }
+        wrapper.vm.$emit('update:tasks', updatedTasks)
+      }
+    }
 
-   const draggedTask = { ...mockTasks[0], status: 'In Progress' }
+    const draggedTask = { ...mockTasks[0], status: 'In Progress' }
 
-   onDragChange(
-     {
-       //  @ts-expect-error eslint-disable-line
-       added: { element: draggedTask },
-     },
-     'In Progress',
-   )
+    onDragChange(
+      {
+        //  @ts-expect-error eslint-disable-line
+        added: { element: draggedTask },
+      },
+      'In Progress',
+    )
 
-   const emittedTasks = wrapper.emitted('update:tasks')?.[0][0] as Task[]
-   const updatedTask = emittedTasks?.find((task: Task) => task.id === draggedTask.id)
+    const emittedTasks = wrapper.emitted('update:tasks')?.[0][0] as Task[]
+    const updatedTask = emittedTasks?.find((task: Task) => task.id === draggedTask.id)
 
-   expect(updatedTask?.status).toBe('In Progress')
- })
+    expect(updatedTask?.status).toBe('In Progress')
+  })
 
   it('displays no data message when tasks array is empty', async () => {
     const emptyWrapper = mount(KanbanBoard, {

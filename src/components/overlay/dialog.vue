@@ -2,7 +2,6 @@
   <div
     v-show="open"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 py-1"
-
     @click.self="closeOnOverlay ? closeDialog() : null"
   >
     <transition name="scale-fade">
@@ -12,18 +11,16 @@
         role="dialog"
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
-
         class="bg-white rounded-lg shadow-lg overflow-hidden w-full max-h-full flex flex-col"
         :class="customeClass"
       >
         <div
           v-if="!hideHeader"
-          class="flex justify-between items-center p-4 "
+          class="flex justify-between items-center p-4"
           :class="header && 'border-b border-gray-200'"
         >
-          <h4  class="text-lg font-medium tracking-wider">{{ header }}</h4>
+          <h4 class="text-lg font-medium tracking-wider">{{ header }}</h4>
           <button
-
             aria-label="Close dialog"
             @click="closeDialog"
             class="text-gray-400 hover:text-gray-500"
@@ -48,9 +45,9 @@
         <!-- <div class="mt-4">
           <slot></slot>
         </div> -->
-         <div id="dialogDescription" class="p-4 overflow-y-auto flex-1">
-            <slot></slot>
-          </div>
+        <div id="dialogDescription" class="p-4 overflow-y-auto flex-1">
+          <slot></slot>
+        </div>
         <!-- <div class="flex justify-end mt-6 p-3">
           <button
             @click="closeDialog"
@@ -71,7 +68,6 @@
 </template>
 
 <script setup lang="ts">
-
 defineOptions({
   name: 'overlay-dialog',
 })
@@ -88,7 +84,7 @@ defineProps({
   },
   confirmButtonText: {
     type: String,
-    default: "Save",
+    default: 'Save',
   },
   closeOnOverlay: {
     type: Boolean,
@@ -98,16 +94,16 @@ defineProps({
     type: String,
     required: false,
   },
-  hideHeader:Boolean
-});
+  hideHeader: Boolean,
+})
 
 // Emit events
-const emit = defineEmits(["update:visible", "confirm"]);
+const emit = defineEmits(['update:visible', 'confirm'])
 
 // Methods
 const closeDialog = () => {
-  emit("update:visible", false);
-};
+  emit('update:visible', false)
+}
 
 // const confirmAction = () => {
 //   emit("confirm");
@@ -129,7 +125,9 @@ const closeDialog = () => {
 
 .dropdown-enter-active,
 .dropdown-leave-active {
-  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transition:
+    transform 0.2s ease-out,
+    opacity 0.2s ease-out;
 }
 
 .dropdown-enter-from,
