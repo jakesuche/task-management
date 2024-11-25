@@ -16,7 +16,7 @@ import {
   TableHead,
   TableCell,
   TableCaption,
-} from '@/components/data/table.vue'
+} from '@/components/data/table'
 import Badge from '@/components/misc/bagde.vue'
 // import Badge from '@/components/ui/Badge.vue'
 import { Edit2Icon, Trash2Icon } from 'lucide-vue-next'

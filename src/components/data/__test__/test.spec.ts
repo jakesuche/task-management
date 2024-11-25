@@ -9,7 +9,7 @@ import {
   TableHead,
   TableCell,
   TableCaption,
-} from '@/components/data/table.vue'
+} from '@/components/data/table'
 
 describe('Table Components', () => {
   describe('Table Component', () => {

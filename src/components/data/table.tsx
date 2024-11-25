@@ -1,4 +1,4 @@
-<script  lang="ts">
+
 import { cn } from "@/util/common";
 import { defineComponent, h } from "vue";
 
@@ -141,4 +141,4 @@ export const TableCaption = defineComponent({
       );
   },
 });
-</script>
+
