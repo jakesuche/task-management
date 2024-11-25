@@ -26,8 +26,9 @@ const props = defineProps<{ src?: string; name?: string; show_name?: boolean }>(
 
 const initials = computed(() => {
   if (props?.name) {
-    const names = props?.name?.split(" ");
-    return names?.slice(0,2).map((n) => n[0]).join("");
+     const cleanName = props.name.trim().replace(/\s+/g, ' ');
+    const names = cleanName.split(' ');
+    return names.slice(0, 2).map(n => n[0]).join('');
   }
 });
 </script>

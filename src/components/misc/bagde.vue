@@ -27,14 +27,13 @@ const badgeClass = computed(() =>
   cn(
     "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-nowrap",
     variantClasses[props.variant],
-    props.className
+    props?.className
   )
 );
 </script>
 
 <template>
-  <!-- Badge component -->
-  <div :class="badgeClass"  v-bind="$attrs">
+  <div  :class="badgeClass" class="inline-flex"  v-bind="$attrs">
     <slot />
   </div>
 </template>

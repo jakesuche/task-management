@@ -2,6 +2,7 @@
   <div>
     <label :for="id" class="mb-2.5 block text-surface-700 font-medium text-xs">{{ label }}</label>
     <textarea
+      v-bind="$attrs"
       :id="id"
       :rows="rows"
       :placeholder="placeholder"

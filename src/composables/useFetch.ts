@@ -3,7 +3,7 @@ import { BASE_URL } from '@/util/constants'
 
 import { onMounted, ref } from 'vue'
 
-export function useFetch<T>(url: string, options?: RequestInit) {
+export function useFetch<T>(url: string) {
 
   const data = ref<T | null>(null)
   const isLoading = ref(true)
@@ -15,7 +15,7 @@ export function useFetch<T>(url: string, options?: RequestInit) {
     error.value = null
 
     try {
-      const response = await fetch(`${BASE_URL}${url}`, options)
+      const response = await fetch(`${BASE_URL}${url}`)
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`)
       }
