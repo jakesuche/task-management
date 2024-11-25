@@ -72,7 +72,7 @@ describe('Badge', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
     mount(Badge, {
       props: {
-        variant: 'invalid-variant' as any,
+        variant: 'invalid-variant' as 'default' | 'secondary' | 'destructive' | 'outline'
       },
     })
     expect(warn).toHaveBeenCalled()

@@ -189,7 +189,7 @@ import {
   UserIcon,
 } from 'lucide-vue-next'
 import { useField, useForm } from 'vee-validate'
-import { initialTask, TaskSchema, type TaskSchemaProps } from '@/schema/task'
+import {  TaskSchema, type TaskSchemaProps } from '@/schema/task'
 
 
 const props = defineProps({
@@ -205,9 +205,9 @@ const props = defineProps({
 const newComment = ref('')
 const isEditingTitle = ref(false)
 const isEditingDescription = ref(false)
-const editedDueDate = ref<Date | undefined>(props.task?.dueDate ? new Date(props.task.dueDate) : undefined)
-const editedStatus = ref<Status>(props?.task?.status)
-const editedPriority = ref<Priority>(props?.task?.priority)
+// const editedDueDate = ref<Date | undefined>(props.task?.dueDate ? new Date(props.task.dueDate) : undefined)
+// const editedStatus = ref<Status>(props?.task?.status)
+// const editedPriority = ref<Priority>(props?.task?.priority)
 
 const {handleSubmit,errors, setValues} = useForm<TaskSchemaProps>({
   validationSchema:TaskSchema,
@@ -242,23 +242,23 @@ const handleDescriptionSave = () => {
   isEditingDescription.value = false
 }
 
-const handleDateChange = (date: Date | undefined) => {
-  editedDueDate.value = date
-  if (date) {
-     emits('update', { ...props.task, dueDate: date.toISOString()})
+// const handleDateChange = (date: Date | undefined) => {
+//   editedDueDate.value = date
+//   if (date) {
+//      emits('update', { ...props.task, dueDate: date.toISOString()})
 
-  }
-}
+//   }
+// }
 
-const handleStatusChange = (status: Status) => {
-  editedStatus.value = status
-   emits('update', { ...props.task, status})
-}
+// const handleStatusChange = (status: Status) => {
+//   editedStatus.value = status
+//    emits('update', { ...props.task, status})
+// }
 
-const handlePriorityChange = (priority: Priority) => {
-  editedPriority.value = priority
-   emits('update', { ...props.task, priority})
-}
+// const handlePriorityChange = (priority: Priority) => {
+//   editedPriority.value = priority
+//    emits('update', { ...props.task, priority})
+// }
 
 const onSubmit = handleSubmit((task)=> {
   emits('update', task)

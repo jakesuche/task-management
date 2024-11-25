@@ -30,5 +30,6 @@ const initials = computed(() => {
     const names = cleanName.split(' ');
     return names.slice(0, 2).map(n => n[0]).join('');
   }
+  return ''
 });
 </script>

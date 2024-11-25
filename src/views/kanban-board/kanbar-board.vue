@@ -12,7 +12,7 @@
         @change="(e) => onDragChange(e, column.id)"
         class="bg-gray-100 p-2 rounded-md min-h-[500px]"
       >
-        <div v-for="task in getTasksForColumn( column.id).value">
+        <div :key="task.id" v-for="task in getTasksForColumn( column.id).value">
           <div class="bg-white p-4 mb-2 rounded shadow">
             <h4 class="font-medium mb-2">{{ task.title }}</h4>
             <p class="text-sm text-gray-600 mb-2">{{ task.description }}</p>
@@ -45,9 +45,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRaw } from 'vue';
+import { computed } from 'vue';
 import {   VueDraggableNext as VueDraggable } from 'vue-draggable-next';
 import { Edit2Icon, Trash2Icon } from 'lucide-vue-next';
+
+interface Event  {
+  element:Task
+}
+
 
 const props = defineProps<{
   tasks: Task[];
@@ -87,7 +92,8 @@ const getPriorityColor = (priority: string) => {
   }
 };
 
-const onDragChange = (evt: any, columnId: string) => {
+
+const onDragChange = (evt: {moved:Event,added:Event}, columnId: string) => {
   if (evt.added || evt.moved) {
     const updatedTasks = props.tasks.map(task => {
       if (task.id === evt.added?.element.id || task.id === evt.moved?.element.id) {

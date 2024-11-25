@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import DropdownComponent from '@/components/forms/select-input.vue'
 
 describe('DropdownComponent', () => {
@@ -37,8 +37,6 @@ describe('DropdownComponent', () => {
 
   it('opens dropdown when toggle is clicked', async () => {
     const wrapper = mountComponent()
-    const localButton = wrapper.find('.cursor-pointer')
-    console.log(localButton)
     await wrapper.find('.cursor-pointer').trigger('click')
 
     // Check if dropdown is opened
@@ -59,7 +57,6 @@ describe('DropdownComponent', () => {
 
     // Click first option
     const options = wrapper.findAll('.dropdown-content .cursor-pointer')
-    console.log(options)
     await options[0].trigger('click')
 
     // Check if correct value is emitted

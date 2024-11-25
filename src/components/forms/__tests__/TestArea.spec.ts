@@ -90,7 +90,7 @@ describe('TextAreaComponent', () => {
 
       // Check emitted events
       expect(wrapper.emitted('update:modelValue')).toBeTruthy()
-      expect(wrapper.emitted('update:modelValue')![0]).toEqual([testValue])
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([testValue])
     })
 
     it('updates textarea value when modelValue prop changes', async () => {
@@ -112,7 +112,7 @@ describe('TextAreaComponent', () => {
 
       await textarea.setValue('')
 
-      expect(wrapper.emitted('update:modelValue')![0]).toEqual([''])
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([''])
     })
   })
 
@@ -161,7 +161,7 @@ describe('TextAreaComponent', () => {
 
       await wrapper.find('textarea').setValue(longText)
 
-      expect(wrapper.emitted('update:modelValue')![0]).toEqual([longText])
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([longText])
     })
 
     it('handles special characters', async () => {
@@ -170,7 +170,7 @@ describe('TextAreaComponent', () => {
 
       await wrapper.find('textarea').setValue(specialChars)
 
-      expect(wrapper.emitted('update:modelValue')![0]).toEqual([specialChars])
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([specialChars])
     })
 
     it('handles multiline input', async () => {
@@ -179,7 +179,7 @@ describe('TextAreaComponent', () => {
 
       await wrapper.find('textarea').setValue(multilineText)
 
-      expect(wrapper.emitted('update:modelValue')![0]).toEqual([multilineText])
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([multilineText])
     })
   })
 

@@ -3,7 +3,7 @@ defineOptions({
   name: 'TaskDashboard',
 })
 
-import { computed, ref, watch } from 'vue'
+import {  ref } from 'vue'
 import TaskFilter from '@/views/task-filter/task-filter.vue'
 import KanbarBoard from '../kanban-board/kanbar-board.vue'
 import TaskList from '@/views/task-list/task-list.vue'
@@ -36,6 +36,7 @@ const { tasks} = storeToRefs(taskStore)
 const confirmationStore = useConfirmation()
 
 const createUpdateTaskMutation = (taskId: number) => {
+
   return useMutation<{}, Task>(`${endPointTask}/${taskId}`, 'PUT')
 }
 
@@ -43,20 +44,6 @@ const createDeleteMutation = (taskId: number) => {
   return useMutation<{}, Task>(`${endPointTask}/${taskId}`, 'DELETE')
 }
 
-const createBulkUpdateTaskMutation = () => {
-  return useMutation<Task[], Task[]>(
-    `/tasks/bulk`,  // URL for bulk task update
-    'PUT',          // Use PUT or PATCH based on your API
-    {
-      onSuccess: (updatedTasks) => {
-        console.log('Bulk update successful:', updatedTasks)
-      },
-      onError: (error) => {
-        console.error('Error updating tasks:', error)
-      },
-    }
-  )
-}
 
 
 
@@ -95,7 +82,6 @@ const handleDeleteTask = async (id: number): Promise<void> => {
 
 // Filter tasks based on status, priority, or sorting
 const handleFilter = (status: string, priority: string, sortBy: string): void => {
-  console.log(priority)
   taskStore.applyFilters(status, priority, sortBy)
 }
 
@@ -110,11 +96,9 @@ const handleDragEnd = async (result: Task[]): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
       mutate(task, {
         onSuccess: () => {
-          console.log(`Task ${task.id} updated successfully.`)
           resolve()
         },
         onError: (error) => {
-          console.error(`Failed to update task ${task.id}:`, error)
           reject(error)
         },
       })
@@ -122,9 +106,9 @@ const handleDragEnd = async (result: Task[]): Promise<void> => {
   })
   try {
     await Promise.all(updatePromises)
-    console.log('All tasks updated successfully.')
+    addToast({severity:'success',summary:'Task updated successfully'})
   } catch (error) {
-    console.error('One or more tasks failed to update:', error)
+    addToast({severity:'success',summary:`Task failed'${error}`})
   }
 
 
@@ -148,8 +132,7 @@ const handleTaskUpdate = (task: Task) => {
       addToast({ summary: 'Task updated success', severity: 'success' })
       detailsDialog.value = false
     },
-    onError: (error) => {
-      console.error('Failed to update task:', error)
+    onError: () => {
       addToast({ summary: 'Failed to update task:', severity: 'error' })
     },
   })

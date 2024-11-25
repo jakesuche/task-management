@@ -13,7 +13,7 @@ export function useClickOutside(
   const { exclude = [], enabled = true } = options
 
   function handleClick(event: MouseEvent) {
-    if (!enabled) return
+    if (!enabled) {return}
 
     const target = event.target as HTMLElement
     const el = elementRef.value

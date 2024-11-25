@@ -32,11 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType } from "vue";
+import { ref, type FunctionalComponent, type PropType } from "vue";
 
 // Define the tab properties
 type Props = {
-  tabs: { label: string; name: string; icon?: any }[];
+  tabs: { label: string; name: string; icon:FunctionalComponent }[];
 };
 
 const props = defineProps({

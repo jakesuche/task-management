@@ -30,11 +30,8 @@ export const useTaskStore = defineStore('task', () => {
     const index = tasks.value.findIndex((task) => task.id === id)
 
     if (index !== -1) {
-      console.log(`Removing task with ID: ${id}`)
       tasks.value = [...tasks.value.slice(0, index), ...tasks.value.slice(index + 1)]
-    } else {
-      console.log(`Task with ID ${id} not found`)
-    }
+    } 
   }
 
   const applyFilters = (status?: string, priority?: string, sortBy?: string) => {

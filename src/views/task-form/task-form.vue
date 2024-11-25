@@ -18,7 +18,7 @@ const props = defineProps<TaskFormProps>()
 
 
 const emits = defineEmits(['submit'])
-const {handleSubmit,errors, values} = useForm<TaskSchemaProps>({
+const {handleSubmit,errors} = useForm<TaskSchemaProps>({
   validationSchema:TaskSchema,
   initialValues:initialTask
 })
@@ -47,7 +47,7 @@ watch(
   (newTask) => {
     if (newTask) {
       form.title = newTask.title
-      form.description = newTask.description!
+      form.description = newTask?.description
       form.status = newTask.status
       form.priority = newTask.priority
       form.dueDate = new Date(newTask.dueDate).toISOString().split('T')[0]

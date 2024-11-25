@@ -1,21 +1,12 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-// import Table from '@/components/ui/Table.vue'
-// import TableBody from '@/components/ui/TableBody.vue'
-// import TableCell from '@/components/ui/TableCell.vue'
-// import TableHead from '@/components/ui/TableHead.vue'
-// import TableHeader from '@/components/ui/TableHeader.vue'
-// import TableRow from '@/components/ui/TableRow.vue'
 
 import {
   Table,
   TableHeader,
   TableBody,
-  TableFooter,
   TableRow,
   TableHead,
   TableCell,
-  TableCaption,
 } from '@/components/data/table'
 import Badge from '@/components/misc/bagde.vue'
 // import Badge from '@/components/ui/Badge.vue'

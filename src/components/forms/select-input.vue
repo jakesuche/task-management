@@ -101,7 +101,7 @@ useClickOutside(target, (e) => {
 });
 
 const toggleDropdown = () => {
-  if(props.disabled) return
+  if(props.disabled) {return}
   isOpen.value = !isOpen.value;
 };
 

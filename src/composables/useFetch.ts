@@ -22,8 +22,8 @@ export function useFetch<T>(url: string) {
       const result = await response.json()
       setTask(result)
       data.value = result
-    } catch (err: any) {
-      error.value = err.message || 'An error occurred'
+    } catch (err) {
+      error.value = (err as Error).message || 'An error occurred'
     } finally {
       isLoading.value = false
     }

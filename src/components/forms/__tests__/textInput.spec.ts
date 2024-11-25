@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import InputComponent from '@/components/forms/text-input.vue'
 
 describe('InputComponent', () => {

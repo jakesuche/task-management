@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { useFetch } from '@/composables/useFetch'
 import { BASE_URL } from '@/util/constants'
-import { flushPromises, mount } from '@vue/test-utils'
+import { flushPromises  } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { useTaskStore } from '@/stores/task'
 

@@ -7,7 +7,7 @@ import { defineComponent, h } from "vue";
 
 // Table component
 export const Table = defineComponent({
-  name: "Table",
+  name: "CustomeTable",
   props: {
     className: String,
   },

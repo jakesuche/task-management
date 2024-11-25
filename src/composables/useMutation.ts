@@ -57,15 +57,15 @@ export function useMutation<TPayload, TResponse>(
       } else if (options.onSuccess) {
         options.onSuccess(result)
       }
-    } catch (err: any) {
-      error.value = err.message || 'An error occurred'
+    } catch (err) {
+      error.value = (err as Error).message || 'An error occurred'
       isError.value = true
 
       // Trigger the error callback (local > global)
       if (callbacks.onError) {
-        callbacks.onError(error.value as any)
+        callbacks.onError(error.value as string)
       } else if (options.onError) {
-        options.onError(error.value as any)
+        options.onError(error.value as string)
       }
     } finally {
       isPending.value = false
