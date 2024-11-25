@@ -13,7 +13,7 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "mock": "json-server --watch db.json --port 8080",
-    "prepare": "husky || build"
+    "prepare": "husky || true"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.60.6",
