@@ -106,12 +106,6 @@ Make sure you have the following installed on your system:
     npm run mock or yarn mock
    ```
 
-4. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-repo/task-management.git
-   cd task-management
-   npm install or yarn install
-   npm run mock or yarn mock
 
 
 
